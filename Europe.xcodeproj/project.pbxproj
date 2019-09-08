@@ -25,6 +25,8 @@
 		8B10BE032325460400C4CE94 /* DetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B10BE012325460400C4CE94 /* DetailsCell.xib */; };
 		8B10BE062325467D00C4CE94 /* Country+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE042325467D00C4CE94 /* Country+CoreDataClass.swift */; };
 		8B10BE072325467D00C4CE94 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE052325467D00C4CE94 /* Country+CoreDataProperties.swift */; };
+		8B10BE092325471100C4CE94 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE082325471100C4CE94 /* NetworkProvider.swift */; };
+		8B10BE0E232547B900C4CE94 /* CountryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE0D232547B900C4CE94 /* CountryError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		8B10BE012325460400C4CE94 /* DetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCell.xib; sourceTree = "<group>"; };
 		8B10BE042325467D00C4CE94 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8B10BE052325467D00C4CE94 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8B10BE082325471100C4CE94 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		8B10BE0D232547B900C4CE94 /* CountryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				8B10BDC723253EB100C4CE94 /* AppDelegate.swift */,
+				8B10BE0A2325471900C4CE94 /* Services */,
 				8B10BDEC232540B400C4CE94 /* Navigation */,
 				8B10BDF22325426E00C4CE94 /* Cell */,
 				8B10BDEF232541F600C4CE94 /* ViewController */,
@@ -157,11 +162,36 @@
 		8B10BDF72325453800C4CE94 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B10BE0F232547C300C4CE94 /* Enums */,
+				8B10BE0C232547A000C4CE94 /* Core Data */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8B10BE0A2325471900C4CE94 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8B10BE082325471100C4CE94 /* NetworkProvider.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8B10BE0C232547A000C4CE94 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
 				8B10BE042325467D00C4CE94 /* Country+CoreDataClass.swift */,
 				8B10BE052325467D00C4CE94 /* Country+CoreDataProperties.swift */,
 				8B10BDCE23253EB100C4CE94 /* Europe.xcdatamodeld */,
 			);
-			path = Model;
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		8B10BE0F232547C300C4CE94 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				8B10BE0D232547B900C4CE94 /* CountryError.swift */,
+			);
+			name = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,9 +303,11 @@
 				8B10BDD023253EB100C4CE94 /* Europe.xcdatamodeld in Sources */,
 				8B10BDEE232540D600C4CE94 /* Coordinator.swift in Sources */,
 				8B10BE022325460400C4CE94 /* DetailsCell.swift in Sources */,
+				8B10BE092325471100C4CE94 /* NetworkProvider.swift in Sources */,
 				8B10BDEB23253FF300C4CE94 /* StoryboardProtocol.swift in Sources */,
 				8B10BE072325467D00C4CE94 /* Country+CoreDataProperties.swift in Sources */,
 				8B10BDFE232545F100C4CE94 /* FlagCell.swift in Sources */,
+				8B10BE0E232547B900C4CE94 /* CountryError.swift in Sources */,
 				8B10BDC823253EB100C4CE94 /* AppDelegate.swift in Sources */,
 				8B10BE062325467D00C4CE94 /* Country+CoreDataClass.swift in Sources */,
 				8B10BDFA232545DA00C4CE94 /* CountryCell.swift in Sources */,
