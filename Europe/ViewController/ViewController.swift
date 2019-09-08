@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol TableViewModel {
+    
+    var rowCount: Int { get }
+    func item(at indexPath: IndexPath) -> CellItem
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
