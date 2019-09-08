@@ -21,7 +21,6 @@ class NetworkProvider {
                 return
             }
             
-            
             guard let data = data else {
                 completion(.failure(.networkingError(nil)))
                 return
