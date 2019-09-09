@@ -11,15 +11,16 @@ import UIKit
 
 class Coordinator {
     
-    var navigationControllert: UINavigationController
+    var navigationController: UINavigationController
     
     init(with navigationController: UINavigationController) {
         
-        self.navigationControllert = navigationController
+        self.navigationController = navigationController
     }
     
     func start() {
         
+        instantiateCountriesViewController()
         
     }
     
@@ -27,6 +28,39 @@ class Coordinator {
         
         
     }
+}
+
+
+extension Coordinator {
     
+    func instantiateCountriesViewController() {
+        
+        DataProvider.updatedCountries { (result) in
+            
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let countries):
+                let countriesViewModel = CountriesViewModel(with: countries)
+                self.instantiateViewController(with: countriesViewModel)
+            }
+        }
+    }
+    
+    func instantiateViewController(with viewModel: TableViewModel) {
+        
+        let viewController = ViewController.instantiate()
+        viewController.viewModel = viewModel
+        viewController.coordinator = self
+        push(viewController, animated: true)
+    }
+    
+    func push(_ viewController: UIViewController, animated: Bool) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.navigationController.pushViewController(viewController, animated: animated)
+        }
+    }
     
 }

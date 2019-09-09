@@ -13,23 +13,29 @@ class DataProvider {
     
     static func updatedCountries(completion: @escaping (Result<[Country], CountryError>) -> Void) {
         
-        
+        NetworkProvider.getCountries { (result) in
+            
+            switch result {
+                
+            case .failure:
+                
+                completion(allCountries())
+                
+            case .success(let data):
+                
+                DataProcessor.processCountries(with: data, completion: { (result) in
+                    
+                    completion(result)
+                })
+            }
+        }
         
     }
-    
     
     static func allCountries() -> Result<[Country], CountryError> {
         
         return fetchCountries(with: countriesFetchRequest(), in: CoreDataManager.shared.mainContext)
     }
-    
-    
-    // test to be deleted
-    
-//    static func allCountriesBackground() -> Result<[Country], CountryError> {
-//        
-//        return fetchCountries(with: countriesFetchRequest(), in: CoreDataManager.shared.backgroundContext)
-//    }
     
     static func obsoleteCountries(from list: [[String: Any]], in managedObjectContext: NSManagedObjectContext) -> [Country]? {
         

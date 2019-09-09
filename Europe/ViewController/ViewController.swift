@@ -14,11 +14,15 @@ protocol TableViewModel {
     func item(at indexPath: IndexPath) -> CellItem
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Storyboarded {
+    
+    weak var coordinator: Coordinator?
+    
+    var viewModel: TableViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        print(viewModel.rowCount)
     }
 
 

@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Europe/Services/DataProcessor.swift"
-            timestampString = "589657352.805669"
+            timestampString = "589659306.429463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
-            landmarkName = "Updatable"
-            landmarkType = "21">
+            landmarkName = "deleteObsoleteCountries(from:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

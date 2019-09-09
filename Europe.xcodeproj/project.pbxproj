@@ -35,6 +35,7 @@
 		8B10BE21232551AB00C4CE94 /* CountriesProcessingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE20232551AB00C4CE94 /* CountriesProcessingTest.swift */; };
 		8B10BE232325590400C4CE94 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE222325590400C4CE94 /* Constants.swift */; };
 		8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2423256DB900C4CE94 /* CountryTest.swift */; };
+		8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE262325787800C4CE94 /* CountriesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		8B10BE20232551AB00C4CE94 /* CountriesProcessingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesProcessingTest.swift; sourceTree = "<group>"; };
 		8B10BE222325590400C4CE94 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B10BE2423256DB900C4CE94 /* CountryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTest.swift; sourceTree = "<group>"; };
+		8B10BE262325787800C4CE94 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				8B10BE222325590400C4CE94 /* Constants.swift */,
 				8B10BE0A2325471900C4CE94 /* Services */,
 				8B10BDEC232540B400C4CE94 /* Navigation */,
+				8B10BE282325787F00C4CE94 /* ViewModel */,
 				8B10BDF22325426E00C4CE94 /* Cell */,
 				8B10BDEF232541F600C4CE94 /* ViewController */,
 				8B10BDF72325453800C4CE94 /* Model */,
@@ -216,6 +219,14 @@
 				8B10BE0D232547B900C4CE94 /* CountryError.swift */,
 			);
 			name = Enums;
+			sourceTree = "<group>";
+		};
+		8B10BE282325787F00C4CE94 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B10BE262325787800C4CE94 /* CountriesViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +338,7 @@
 				8B10BDCA23253EB100C4CE94 /* ViewController.swift in Sources */,
 				8B10BE232325590400C4CE94 /* Constants.swift in Sources */,
 				8B10BDF12325425F00C4CE94 /* CellLoadable.swift in Sources */,
+				8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */,
 				8B10BDD023253EB100C4CE94 /* Europe.xcdatamodeld in Sources */,
 				8B10BDEE232540D600C4CE94 /* Coordinator.swift in Sources */,
 				8B10BE022325460400C4CE94 /* DetailsCell.swift in Sources */,

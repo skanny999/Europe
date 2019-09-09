@@ -37,6 +37,4 @@ public class Country: NSManagedObject, Updatable {
         
         return data
     }
-    
-
 }
