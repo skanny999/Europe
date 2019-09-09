@@ -16,17 +16,18 @@ class Coordinator {
     init(with navigationController: UINavigationController) {
         
         self.navigationController = navigationController
+        self.navigationController.navigationBar.prefersLargeTitles = true
     }
     
     func start() {
         
         instantiateCountriesViewController()
-        
     }
     
-    func showDetail() {
+    func showDetail(for country: Country) {
         
-        
+        let countryViewModel = CountryViewModel(with: country)
+        instantiateViewController(with: countryViewModel, title: country.name ?? "")
     }
 }
 
@@ -42,15 +43,16 @@ extension Coordinator {
                 print(error)
             case .success(let countries):
                 let countriesViewModel = CountriesViewModel(with: countries)
-                self.instantiateViewController(with: countriesViewModel)
+                self.instantiateViewController(with: countriesViewModel, title: "Countries")
             }
         }
     }
     
-    func instantiateViewController(with viewModel: TableViewModel) {
+    func instantiateViewController(with viewModel: TableViewModel, title: String) {
         
         let viewController = ViewController.instantiate()
         viewController.viewModel = viewModel
+        viewController.title = title
         viewController.coordinator = self
         push(viewController, animated: true)
     }
@@ -58,7 +60,6 @@ extension Coordinator {
     func push(_ viewController: UIViewController, animated: Bool) {
         
         DispatchQueue.main.async { [weak self] in
-            
             self?.navigationController.pushViewController(viewController, animated: animated)
         }
     }

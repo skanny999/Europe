@@ -36,6 +36,8 @@
 		8B10BE232325590400C4CE94 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE222325590400C4CE94 /* Constants.swift */; };
 		8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2423256DB900C4CE94 /* CountryTest.swift */; };
 		8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE262325787800C4CE94 /* CountriesViewModel.swift */; };
+		8B10BE2A2326EE2D00C4CE94 /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE292326EE2D00C4CE94 /* CountryViewModel.swift */; };
+		8B10BE2C2326F17600C4CE94 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */; };
 		8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */; };
 		8B4AFF502326A84E0035B2DE /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */; };
 		8B4AFF522326A8560035B2DE /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */; };
@@ -86,6 +88,8 @@
 		8B10BE222325590400C4CE94 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B10BE2423256DB900C4CE94 /* CountryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTest.swift; sourceTree = "<group>"; };
 		8B10BE262325787800C4CE94 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
+		8B10BE292326EE2D00C4CE94 /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
+		8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				8B10BE262325787800C4CE94 /* CountriesViewModel.swift */,
+				8B10BE292326EE2D00C4CE94 /* CountryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */,
+				8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -403,10 +409,12 @@
 				8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */,
 				8B10BE022325460400C4CE94 /* DetailsCell.swift in Sources */,
 				8B10BE092325471100C4CE94 /* NetworkProvider.swift in Sources */,
+				8B10BE2A2326EE2D00C4CE94 /* CountryViewModel.swift in Sources */,
 				8B10BDEB23253FF300C4CE94 /* StoryboardProtocol.swift in Sources */,
 				8B10BE072325467D00C4CE94 /* Country+CoreDataProperties.swift in Sources */,
 				8B10BE1323254AEC00C4CE94 /* DataProcessor.swift in Sources */,
 				8B10BDFE232545F100C4CE94 /* FlagCell.swift in Sources */,
+				8B10BE2C2326F17600C4CE94 /* Int+Utils.swift in Sources */,
 				8B10BE0E232547B900C4CE94 /* CountryError.swift in Sources */,
 				8B10BE1123254AE100C4CE94 /* DataProvider.swift in Sources */,
 				8B10BDC823253EB100C4CE94 /* AppDelegate.swift in Sources */,

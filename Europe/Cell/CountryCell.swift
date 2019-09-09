@@ -25,7 +25,7 @@ class CountryCell: UITableViewCell, CellLoadable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
     

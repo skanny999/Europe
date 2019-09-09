@@ -14,15 +14,14 @@ class FlagCell: UITableViewCell, CellLoadable {
     
     var item: CellItem? {
         didSet {
-            guard let countryItem = item else { return }
-//            flagImageView.image =
+            guard let flagItem = item else { return }
+            flagImageView.setFlagImage(with: flagItem.imageData)
         }
-        
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.isUserInteractionEnabled = false
     }
 
     
