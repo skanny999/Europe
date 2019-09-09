@@ -10,6 +10,7 @@
 import Foundation
 import CoreData
 import UIKit
+import SVGKit
 
 @objc(Country)
 public class Country: NSManagedObject, Updatable {
@@ -30,7 +31,9 @@ public class Country: NSManagedObject, Updatable {
         
         guard let imageUrlString = dict["flag"] as? String,
             let imageUrl = URL(string: imageUrlString),
-            let data = try? Data(contentsOf: imageUrl) as NSData?
+            let urlData = try? Data(contentsOf: imageUrl),
+            let uiimage = SVGKImage(data: urlData)?.uiImage,
+            let data = uiimage.pngData() as NSData?
             else {
                 return self.flagData
         }

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SVGKit
 
 extension UIImageView {
     
@@ -22,8 +21,8 @@ extension UIImageView {
             self.image = europeFlagImage
             return
         }
-        
-        self.image = UIImage(data: data) ?? SVGKImage(data: data)?.uiImage ?? europeFlagImage
+
+        self.image = UIImage(data: data) ?? europeFlagImage
     }
     
     private var europeFlagImage: UIImage {

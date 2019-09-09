@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        loadCoordinator()
+        if !AppStatus.isTesting {
+            loadCoordinator()
+        }
         
         return true
     }
@@ -27,12 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navController = UINavigationController()
         
+        prepareWindow(with: navController)
         coordinator = Coordinator(with: navController)
         coordinator?.start()
-
+    }
+    
+    private func prepareWindow(with navigationController: UINavigationController) {
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-        window?.rootViewController = navController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }
