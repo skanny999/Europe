@@ -17,7 +17,7 @@ protocol CellLoadable {
 
 protocol CellItem {
     
-    var image: UIImage? { get }
+    var imageData: Data? { get }
     var title: String? { get }
     var body: String? { get }
 }

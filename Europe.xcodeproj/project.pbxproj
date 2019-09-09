@@ -36,6 +36,10 @@
 		8B10BE232325590400C4CE94 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE222325590400C4CE94 /* Constants.swift */; };
 		8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2423256DB900C4CE94 /* CountryTest.swift */; };
 		8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE262325787800C4CE94 /* CountriesViewModel.swift */; };
+		8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */; };
+		8B4AFF502326A84E0035B2DE /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */; };
+		8B4AFF522326A8560035B2DE /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */; };
+		8B4AFF542326A85D0035B2DE /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF532326A85D0035B2DE /* SVGKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +86,10 @@
 		8B10BE222325590400C4CE94 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B10BE2423256DB900C4CE94 /* CountryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTest.swift; sourceTree = "<group>"; };
 		8B10BE262325787800C4CE94 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
+		8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
+		8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
+		8B4AFF532326A85D0035B2DE /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVGKit.framework; path = Carthage/Build/iOS/SVGKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +97,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4AFF502326A84E0035B2DE /* CocoaLumberjack.framework in Frameworks */,
+				8B4AFF522326A8560035B2DE /* CocoaLumberjackSwift.framework in Frameworks */,
+				8B4AFF542326A85D0035B2DE /* SVGKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +119,7 @@
 				8B10BDC623253EB100C4CE94 /* Europe */,
 				8B10BDDE23253EB300C4CE94 /* EuropeTests */,
 				8B10BDC523253EB100C4CE94 /* Products */,
+				8B4AFF4E2326A84E0035B2DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +137,7 @@
 			children = (
 				8B10BDC723253EB100C4CE94 /* AppDelegate.swift */,
 				8B10BE222325590400C4CE94 /* Constants.swift */,
+				8B4AFF4D2326A5D90035B2DE /* Extensions */,
 				8B10BE0A2325471900C4CE94 /* Services */,
 				8B10BDEC232540B400C4CE94 /* Navigation */,
 				8B10BE282325787F00C4CE94 /* ViewModel */,
@@ -229,6 +242,24 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8B4AFF4D2326A5D90035B2DE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8B4AFF4E2326A84E0035B2DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B4AFF532326A85D0035B2DE /* SVGKit.framework */,
+				8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */,
+				8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,6 +270,7 @@
 				8B10BDC023253EB100C4CE94 /* Sources */,
 				8B10BDC123253EB100C4CE94 /* Frameworks */,
 				8B10BDC223253EB100C4CE94 /* Resources */,
+				8B4AFF4A2326A4370035B2DE /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -330,6 +362,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8B4AFF4A2326A4370035B2DE /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SVGKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SVGKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjack.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjackSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B10BDC023253EB100C4CE94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -341,6 +400,7 @@
 				8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */,
 				8B10BDD023253EB100C4CE94 /* Europe.xcdatamodeld in Sources */,
 				8B10BDEE232540D600C4CE94 /* Coordinator.swift in Sources */,
+				8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */,
 				8B10BE022325460400C4CE94 /* DetailsCell.swift in Sources */,
 				8B10BE092325471100C4CE94 /* NetworkProvider.swift in Sources */,
 				8B10BDEB23253FF300C4CE94 /* StoryboardProtocol.swift in Sources */,
@@ -518,6 +578,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2GM46VBD99;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Europe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,6 +600,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2GM46VBD99;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Europe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

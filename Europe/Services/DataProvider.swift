@@ -29,7 +29,6 @@ class DataProvider {
                 })
             }
         }
-        
     }
     
     static func allCountries() -> Result<[Country], CountryError> {
@@ -40,8 +39,8 @@ class DataProvider {
     static func obsoleteCountries(from list: [[String: Any]], in managedObjectContext: NSManagedObjectContext) -> [Country]? {
         
         let fetchRequest = countriesFetchRequest()
-        let names = list.compactMap{ $0["name"] as? String }
-        fetchRequest.predicate = NSPredicate(format: "NOT name IN %@", names)
+        let currentCountryIdentifiers = list.compactMap{ $0["name"] as? String }
+        fetchRequest.predicate = NSPredicate(format: "NOT name IN %@", currentCountryIdentifiers)
         
         return try? fetchCountries(with: fetchRequest, in: managedObjectContext).get()
     }

@@ -10,15 +10,24 @@ import UIKit
 
 class CountryCell: UITableViewCell, CellLoadable {
 
+    @IBOutlet weak var flagImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
+    var item: CellItem? {
+        didSet {
+            guard let country = item else { return }
+            flagImageView.setFlagImage(with: country.imageData)
+            nameLabel.text = country.title
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
+    
     
 }

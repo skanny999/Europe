@@ -30,13 +30,13 @@ struct CountriesViewModel: TableViewModel {
 
 struct CountryItem: CellItem {
     
-    var image: UIImage?
+    var imageData: Data?
     var title: String?
     var body: String?
     
     init(with country: Country) {
         
-        self.image = UIImage(named: "")
+        self.imageData = country.flagData as Data?
         self.title = country.name ?? ""
     }
 }

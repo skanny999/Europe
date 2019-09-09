@@ -9,16 +9,21 @@
 import UIKit
 
 class FlagCell: UITableViewCell, CellLoadable {
+    
+    @IBOutlet weak var flagImageView: UIImageView!
+    
+    var item: CellItem? {
+        didSet {
+            guard let countryItem = item else { return }
+//            flagImageView.image =
+        }
+        
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
 }
