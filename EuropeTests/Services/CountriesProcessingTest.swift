@@ -13,11 +13,11 @@ import CoreData
 class CountriesProcessingTest: XCTestCase {
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     }
 
     func testModelProcessor() {
@@ -40,12 +40,10 @@ class CountriesProcessingTest: XCTestCase {
             
             XCTAssert(countries.last?.name == "Italia")
             XCTAssert(countries.last?.capital == "Roma")
-            
-            print("fulfill exp1")
+
             exp1.fulfill()
-            
         }
-        print("waiting for expectation 1")
+
         wait(for: [exp1], timeout: 3)
         
         let exp2 = expectation(description: "country")

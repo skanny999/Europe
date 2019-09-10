@@ -8,11 +8,19 @@
 
 import Foundation
 
+protocol URLSessionProtocol {
+
+    func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+}
+
+extension URLSession: URLSessionProtocol {}
+
+
 class NetworkProvider {
     
     static let url = URL(string: "https://restcountries.eu/rest/v2/regionalbloc/eu")!
     
-    static func getCountries(urlSession: URLSession = URLSession.shared, completion: @escaping (Result<Data, CountryError>) -> Void) {
+    static func getCountries(urlSession: URLSessionProtocol = URLSession.shared, completion: @escaping (Result<Data, CountryError>) -> Void) {
         
         let task = urlSession.dataTask(with: url) { (data, response, error) in
             
@@ -27,7 +35,7 @@ class NetworkProvider {
             }
             
             guard let response = response as? HTTPURLResponse,
-                (200...299)~=response.statusCode else {
+                200...299~=response.statusCode else {
                     completion(.failure(.networkingError(nil)))
                     return
             }

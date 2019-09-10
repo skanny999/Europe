@@ -14,7 +14,7 @@ enum CountryError: Error {
     case parsingError(Error?)
     case fetchingError(Error?)
     case savingError(Error?)
-    case genericError(description: String, code: Int?)
+    case genericError(descr: String, code: Int?)
 }
 
 extension CountryError {
@@ -30,7 +30,7 @@ extension CountryError {
             return error.debugDescription
         case .savingError(let error):
             return error.debugDescription
-        case .genericError(let description, _):
+        case .genericError(let description, let code):
             return description
         }
     }

@@ -42,6 +42,8 @@
 		8B4AFF502326A84E0035B2DE /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */; };
 		8B4AFF522326A8560035B2DE /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */; };
 		8B4AFF542326A85D0035B2DE /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF532326A85D0035B2DE /* SVGKit.framework */; };
+		8B4AFF562327E9760035B2DE /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF552327E9760035B2DE /* MockProvider.swift */; };
+		8B4AFF5B2327F6DC0035B2DE /* NetworkingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		8B4AFF532326A85D0035B2DE /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVGKit.framework; path = Carthage/Build/iOS/SVGKit.framework; sourceTree = "<group>"; };
+		8B4AFF552327E9760035B2DE /* MockProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProvider.swift; sourceTree = "<group>"; };
+		8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,12 +163,10 @@
 		8B10BDDE23253EB300C4CE94 /* EuropeTests */ = {
 			isa = PBXGroup;
 			children = (
-				8B10BE20232551AB00C4CE94 /* CountriesProcessingTest.swift */,
-				8B10BE2423256DB900C4CE94 /* CountryTest.swift */,
-				8B10BE1623254F6600C4CE94 /* Countries.json */,
-				8B10BE1823254F6600C4CE94 /* Country.json */,
-				8B10BE1923254F6600C4CE94 /* FileExtractor.swift */,
 				8B10BDE123253EB300C4CE94 /* Info.plist */,
+				8B4AFF592327EE000035B2DE /* Services */,
+				8B4AFF582327EDD70035B2DE /* Model */,
+				8B4AFF572327ED5D0035B2DE /* Mock */,
 			);
 			path = EuropeTests;
 			sourceTree = "<group>";
@@ -264,6 +266,34 @@
 				8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B4AFF572327ED5D0035B2DE /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				8B4AFF552327E9760035B2DE /* MockProvider.swift */,
+				8B10BE1923254F6600C4CE94 /* FileExtractor.swift */,
+				8B10BE1623254F6600C4CE94 /* Countries.json */,
+				8B10BE1823254F6600C4CE94 /* Country.json */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		8B4AFF582327EDD70035B2DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B10BE2423256DB900C4CE94 /* CountryTest.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8B4AFF592327EE000035B2DE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8B10BE20232551AB00C4CE94 /* CountriesProcessingTest.swift */,
+				8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,8 +458,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4AFF5B2327F6DC0035B2DE /* NetworkingTest.swift in Sources */,
 				8B10BE1D23254F6600C4CE94 /* FileExtractor.swift in Sources */,
 				8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */,
+				8B4AFF562327E9760035B2DE /* MockProvider.swift in Sources */,
 				8B10BE21232551AB00C4CE94 /* CountriesProcessingTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

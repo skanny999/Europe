@@ -12,16 +12,11 @@ import CoreData
 
 class CountryTest: XCTestCase {
     
-    let moc = CoreDataManager.shared.mainContext
+    var countryJson: [String: Any]?
 
     override func setUp() {
         
-        let countries = try! DataProvider.allCountries().get()
-        for country in countries {
-            
-            moc.delete(country)
-        }
-        
+        self.countryJson = MockProvider.mockCountryJson
     }
 
     override func tearDown() {
@@ -30,13 +25,13 @@ class CountryTest: XCTestCase {
 
     func testCountryModel() {
         
-        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: type(of: self))
-        
-        let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String: Any]]
-        let jsonObject = jsonArray.first!
-        
-        let country = Country(entity: NSEntityDescription.entity(forEntityName: "Country", in: moc)!, insertInto: moc)
-        country.update(with: jsonObject)
+//        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: type(of: self))
+//
+//        let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String: Any]]
+//        let jsonObject = jsonArray.first!
+//        
+        let country = Country(entity: NSEntityDescription.entity(forEntityName: "Country", in: MockProvider.context)!, insertInto: MockProvider.context)
+        country.update(with: countryJson!)
         
         XCTAssert(country.name == "Åland Islands", "\(String(describing: country.name))")
         XCTAssert(country.capital == "Mariehamn", "\(String(describing: country.capital))")
