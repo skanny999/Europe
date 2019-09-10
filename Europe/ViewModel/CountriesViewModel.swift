@@ -17,7 +17,7 @@ struct CountriesViewModel: TableViewModel {
     init(with countries: [Country]) {
         
         self.countries = countries
-        countryItems = countries.map { CountryItem(with: $0)}
+        countryItems = countries.map { CountryItem(with: $0) }
     }
     
     var rowCount: Int {
@@ -34,8 +34,6 @@ struct CountriesViewModel: TableViewModel {
         
         return countries[indexPath.row]
     }
-    
-    
 }
 
 

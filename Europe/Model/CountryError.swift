@@ -14,24 +14,24 @@ enum CountryError: Error {
     case parsingError(Error?)
     case fetchingError(Error?)
     case savingError(Error?)
-    case genericError(descr: String, code: Int?)
+    case genericError
 }
 
-extension CountryError {
+extension CountryError: LocalizedError {
     
-    var friendlyDescription: String {
+    var errorDescription: String? {
         
         switch self {
         case .networkingError(let error):
-            return error.debugDescription
+            return error?.localizedDescription
         case .parsingError(let error):
-            return error.debugDescription
+            return error?.localizedDescription
         case .fetchingError(let error):
-            return error.debugDescription
+            return error?.localizedDescription
         case .savingError(let error):
-            return error.debugDescription
-        case .genericError(let description, let code):
-            return description
+            return error?.localizedDescription
+        case .genericError:
+            return "Something went wrong"
         }
     }
     

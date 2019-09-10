@@ -49,7 +49,7 @@ class DataProcessor {
             if let result = DataProvider.obsoleteCountries(from: list, in: backgroundContext) {
 
                 for country in result {
-                    print("deleting \(country.name!)")
+
                     backgroundContext.delete(country)
                 }
             }

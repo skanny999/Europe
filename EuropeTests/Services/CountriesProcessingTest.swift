@@ -29,10 +29,7 @@ class CountriesProcessingTest: XCTestCase {
         DataProcessor.processCountries(with: data) { (result) in
             
             let countries = try! result.get()
-            
-            print(countries.first!.identifier!)
-            print(countries.last!.identifier!)
-            
+
             XCTAssert(countries.count == 2, "\(countries.count)")
             
             XCTAssert(countries.first?.name == "Åland Islands", countries.first!.name!)
@@ -50,7 +47,6 @@ class CountriesProcessingTest: XCTestCase {
         
         let countryData = FileExtractor.extractJsonFile(withName: "Country", forClass: type(of: self))
         
-        print("start processing second file")
         DataProcessor.processCountries(with: countryData) { (result) in
             
             let countries = try! result.get()

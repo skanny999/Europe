@@ -12,16 +12,16 @@ import XCTest
 class NetworkingTest: XCTestCase {
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     }
     
-    func testNetworkProvider() {
+    func testNetworkError() {
         
-        let error = CountryError.genericError(descr: "TestError", code: 401)
+        let error = CountryError.genericError
         let mockSession = URLSessionMock(data: nil, response: nil, error: error)
         
         let expect = expectation(description: "ErrorTest")
@@ -31,7 +31,7 @@ class NetworkingTest: XCTestCase {
             switch result {
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssert(error.friendlyDescription == "Test Error", error.friendlyDescription)
+                XCTAssert(error.localizedDescription == "Something went wrong", error.localizedDescription)
             case .success:
                 XCTFail()
             }
@@ -40,8 +40,75 @@ class NetworkingTest: XCTestCase {
         }
         
         wait(for: [expect], timeout: 1)
+    }
+    
+    func testResponseError() {
         
+        let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 400, httpVersion: nil, headerFields: nil)
+        let mockSession = URLSessionMock(data: nil, response: response, error: nil)
         
+        let expect = expectation(description: "ErrorTest")
+        
+        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+            
+            switch result {
+            case .failure(let error):
+                XCTAssertNotNil(error)
+
+            case .success:
+                XCTFail()
+            }
+            
+            expect.fulfill()
+        }
+        
+        wait(for: [expect], timeout: 1)
+    }
+    
+    func testDataSuccess() {
+        
+        let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 200, httpVersion: nil, headerFields: nil)
+        let mockSession = URLSessionMock(jsonDict: ["Mock":"Data" as AnyObject], response: response, error: nil)!
+        
+        let expect = expectation(description: "ErrorTest")
+        
+        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+            
+            switch result {
+            case .failure:
+                XCTFail()
+                
+            case .success(let data):
+                XCTAssertNotNil(data)
+            }
+            
+            expect.fulfill()
+        }
+        
+        wait(for: [expect], timeout: 1)
+    }
+    
+    func testValidDataInvalidResponseFail() {
+        
+        let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 400, httpVersion: nil, headerFields: nil)
+        let mockSession = URLSessionMock(jsonDict: ["Mock":"Data" as AnyObject], response: response, error: nil)!
+        
+        let expect = expectation(description: "ErrorTest")
+        
+        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+            
+            switch result {
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                
+            case .success:
+                XCTFail()
+            }
+            
+            expect.fulfill()
+        }
+        
+        wait(for: [expect], timeout: 1)
     }
 
 }

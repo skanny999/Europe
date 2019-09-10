@@ -11,23 +11,53 @@ import CoreData
 @testable import Europe
 
 class MockProvider {
+
+    static let shared: MockProvider = MockProvider()
     
-    static let context = CoreDataManager.shared.mainContext
+    var mockCountry: Country {
+        return country!
+    }
     
-    static var mockCountryJson: [String: Any] {
+    init() {
         
-        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: self)
+        if country == nil {
+            let context = inMemoryManagedObjectContext()
+            self.context = context
+            let country = Country(entity: NSEntityDescription.entity(forEntityName: "Country", in: context)!, insertInto: context)
+            country.update(with: mockCountryJson)
+            try! context.save()
+            self.country = country
+        }
+    }
+    
+    private var country: Country?
+    private var context: NSManagedObjectContext?
+    
+    var mockCountryJson: [String: Any] {
+        
+        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: MockProvider.self)
         
         let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String: Any]]
         return jsonArray.first!
     }
     
-    static var mockCountry: Country {
+    func inMemoryManagedObjectContext() -> NSManagedObjectContext {
+        let managedObjectModel = NSManagedObjectModel.mergedModel(from:[Bundle.main])!
         
-        let country = Country(entity: NSEntityDescription.entity(forEntityName: "Country", in: context)!, insertInto: context)
-        country.update(with: mockCountryJson)
-        return country
+        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+        
+        do {
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+        } catch {
+            print("Adding in-memory persistent store failed")
+        }
+        
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        
+        return managedObjectContext
     }
+    
     
 }
 

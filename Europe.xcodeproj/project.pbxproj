@@ -38,6 +38,8 @@
 		8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE262325787800C4CE94 /* CountriesViewModel.swift */; };
 		8B10BE2A2326EE2D00C4CE94 /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE292326EE2D00C4CE94 /* CountryViewModel.swift */; };
 		8B10BE2C2326F17600C4CE94 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */; };
+		8B10BE2E23283E0900C4CE94 /* CountryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2D23283E0900C4CE94 /* CountryViewModelTest.swift */; };
+		8B10BE312328458A00C4CE94 /* CountriesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE302328458A00C4CE94 /* CountriesViewModelTest.swift */; };
 		8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */; };
 		8B4AFF502326A84E0035B2DE /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */; };
 		8B4AFF522326A8560035B2DE /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */; };
@@ -92,6 +94,8 @@
 		8B10BE262325787800C4CE94 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
 		8B10BE292326EE2D00C4CE94 /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
 		8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
+		8B10BE2D23283E0900C4CE94 /* CountryViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModelTest.swift; sourceTree = "<group>"; };
+		8B10BE302328458A00C4CE94 /* CountriesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModelTest.swift; sourceTree = "<group>"; };
 		8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
@@ -163,10 +167,11 @@
 		8B10BDDE23253EB300C4CE94 /* EuropeTests */ = {
 			isa = PBXGroup;
 			children = (
-				8B10BDE123253EB300C4CE94 /* Info.plist */,
+				8B4AFF572327ED5D0035B2DE /* Mock */,
 				8B4AFF592327EE000035B2DE /* Services */,
 				8B4AFF582327EDD70035B2DE /* Model */,
-				8B4AFF572327ED5D0035B2DE /* Mock */,
+				8B10BE2F23283E2800C4CE94 /* ViewModelTest */,
+				8B10BDE123253EB300C4CE94 /* Info.plist */,
 			);
 			path = EuropeTests;
 			sourceTree = "<group>";
@@ -247,6 +252,15 @@
 				8B10BE292326EE2D00C4CE94 /* CountryViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8B10BE2F23283E2800C4CE94 /* ViewModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				8B10BE2D23283E0900C4CE94 /* CountryViewModelTest.swift */,
+				8B10BE302328458A00C4CE94 /* CountriesViewModelTest.swift */,
+			);
+			path = ViewModelTest;
 			sourceTree = "<group>";
 		};
 		8B4AFF4D2326A5D90035B2DE /* Extensions */ = {
@@ -460,9 +474,11 @@
 			files = (
 				8B4AFF5B2327F6DC0035B2DE /* NetworkingTest.swift in Sources */,
 				8B10BE1D23254F6600C4CE94 /* FileExtractor.swift in Sources */,
+				8B10BE312328458A00C4CE94 /* CountriesViewModelTest.swift in Sources */,
 				8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */,
 				8B4AFF562327E9760035B2DE /* MockProvider.swift in Sources */,
 				8B10BE21232551AB00C4CE94 /* CountriesProcessingTest.swift in Sources */,
+				8B10BE2E23283E0900C4CE94 /* CountryViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

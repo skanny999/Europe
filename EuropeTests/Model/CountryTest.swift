@@ -16,7 +16,7 @@ class CountryTest: XCTestCase {
 
     override func setUp() {
         
-        self.countryJson = MockProvider.mockCountryJson
+        self.countryJson = MockProvider.shared.mockCountryJson
     }
 
     override func tearDown() {
@@ -24,14 +24,8 @@ class CountryTest: XCTestCase {
     }
 
     func testCountryModel() {
-        
-//        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: type(of: self))
-//
-//        let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String: Any]]
-//        let jsonObject = jsonArray.first!
-//        
-        let country = Country(entity: NSEntityDescription.entity(forEntityName: "Country", in: MockProvider.context)!, insertInto: MockProvider.context)
-        country.update(with: countryJson!)
+                
+        let country = MockProvider.shared.mockCountry
         
         XCTAssert(country.name == "Åland Islands", "\(String(describing: country.name))")
         XCTAssert(country.capital == "Mariehamn", "\(String(describing: country.capital))")
