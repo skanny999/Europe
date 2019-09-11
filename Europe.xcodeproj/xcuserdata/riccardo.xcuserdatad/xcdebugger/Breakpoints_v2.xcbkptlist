@@ -9,13 +9,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Europe/Services/DataProvider.swift"
-            timestampString = "589740441.2597359"
+            filePath = "Europe/Navigation/Coordinator.swift"
+            timestampString = "589900414.9010431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "updatedCountries(completion:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "instantiateCountriesViewController()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Europe.Coordinator.instantiateCountriesViewController() -&gt; ()"
+                  moduleName = "Europe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riccardo/Coding/iOS/Europe/Europe/Navigation/Coordinator.swift"
+                  timestampString = "589899972.304853"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;Europe.Country&gt;, Europe.CountryError&gt;) -&gt; () in Europe.Coordinator.instantiateCountriesViewController() -&gt; ()"
+                  moduleName = "Europe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riccardo/Coding/iOS/Europe/Europe/Navigation/Coordinator.swift"
+                  timestampString = "589899972.30722"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "263">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Europe/Services/DataProvider.swift"
+            timestampString = "589900414.901109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "obsoleteCountries(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

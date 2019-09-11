@@ -16,7 +16,7 @@ class CountryTest: XCTestCase {
 
     override func setUp() {
         
-        self.countryJson = MockProvider.shared.mockCountryJson
+        self.countryJson = MockManager.shared.mockCountryJson
     }
 
     override func tearDown() {
@@ -25,13 +25,17 @@ class CountryTest: XCTestCase {
 
     func testCountryModel() {
                 
-        let country = MockProvider.shared.mockCountry
+        let country = MockManager.shared.mockCountry
         
         XCTAssert(country.name == "Åland Islands", "\(String(describing: country.name))")
         XCTAssert(country.capital == "Mariehamn", "\(String(describing: country.capital))")
         XCTAssert(country.identifier == "ALA", "\(String(describing: country.identifier))")
         XCTAssert(country.population == 28875, "\(String(describing: country.population))")
-        XCTAssertNotNil(country.flagData)
+        if MockManager.shared.networkIsConnected {
+            XCTAssertNotNil(country.flagData)
+        } else {
+            XCTAssertNil(country.flagData)
+        }
     }
 
 }

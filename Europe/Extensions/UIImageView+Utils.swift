@@ -17,16 +17,15 @@ extension UIImageView {
         self.layer.borderColor = UIColor.darkGray.cgColor
         
         
-        guard let data = data else {
+        if let data = data, let flag = UIImage(data: data) {
+            self.image = flag
+        } else {
             self.image = europeFlagImage
-            return
         }
-
-        self.image = UIImage(data: data) ?? europeFlagImage
     }
     
     private var europeFlagImage: UIImage {
         
-        return UIImage(named: " ")!
+        return UIImage(named: "europe_flag")!
     }
 }

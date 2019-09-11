@@ -35,7 +35,7 @@ class DataProcessor {
                         try CoreDataManager.shared.save()
                         completion(DataProvider.allCountries())
                     } catch {
-                        completion(.failure(.parsingError(nil)))
+                        completion(.failure(.parsingError))
                     }
                 }
             }
@@ -83,9 +83,11 @@ extension Updatable where Self: NSManagedObject {
         } else {
             
             let name = String(describing: self)
-            let entityDescription = NSEntityDescription.entity(forEntityName: name, in: context)
+            guard let entityDescription = NSEntityDescription.entity(forEntityName: name, in: context) else {
+                fatalError("Entity without description")
+            }
             
-            let object = Self(entity: entityDescription!, insertInto: context)
+            let object = Self(entity: entityDescription, insertInto: context)
             
             object.update(with: dictionary)
         }
@@ -98,7 +100,7 @@ extension Updatable where Self: NSManagedObject {
     
     private static func fetchRequest(forId id: String) -> NSFetchRequest<NSFetchRequestResult> {
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Country")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Const.countryEntityName)
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         request.predicate = NSPredicate(format: "%K == %@", objectIdentifier, id)
         return request

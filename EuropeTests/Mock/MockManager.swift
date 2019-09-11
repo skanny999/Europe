@@ -8,12 +8,14 @@
 
 import Foundation
 import CoreData
+import Network
 @testable import Europe
 
-class MockProvider {
+class MockManager {
 
-    static let shared: MockProvider = MockProvider()
-    
+    static let shared: MockManager = MockManager()
+
+    var networkIsConnected: Bool = false
     var mockCountry: Country {
         return country!
     }
@@ -23,19 +25,31 @@ class MockProvider {
         if country == nil {
             let context = inMemoryManagedObjectContext()
             self.context = context
-            let country = Country(entity: NSEntityDescription.entity(forEntityName: "Country", in: context)!, insertInto: context)
+            let country = Country(entity: NSEntityDescription.entity(forEntityName: Const.countryEntityName, in: context)!, insertInto: context)
             country.update(with: mockCountryJson)
             try! context.save()
             self.country = country
         }
+        configureMonitor()
     }
     
     private var country: Country?
     private var context: NSManagedObjectContext?
+    private let monitor = NWPathMonitor()
+    
+    private func configureMonitor() {
+        
+        monitor.pathUpdateHandler = { path in
+            self.networkIsConnected = path.status == .satisfied
+        }
+        
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
     
     var mockCountryJson: [String: Any] {
         
-        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: MockProvider.self)
+        let data = FileExtractor.extractJsonFile(withName: "Country", forClass: MockManager.self)
         
         let jsonArray = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String: Any]]
         return jsonArray.first!
@@ -57,8 +71,6 @@ class MockProvider {
         
         return managedObjectContext
     }
-    
-    
 }
 
 

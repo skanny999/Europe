@@ -21,7 +21,7 @@ class NetworkingTest: XCTestCase {
     
     func testNetworkError() {
         
-        let error = CountryError.genericError
+        let error = CountryError.networkingError
         let mockSession = URLSessionMock(data: nil, response: nil, error: error)
         
         let expect = expectation(description: "ErrorTest")
@@ -31,7 +31,7 @@ class NetworkingTest: XCTestCase {
             switch result {
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssert(error.localizedDescription == "Something went wrong", error.localizedDescription)
+                XCTAssert(error.localizedDescription == "We couldn't get the updated european countries, please make sure you are connected to the internet.", error.localizedDescription)
             case .success:
                 XCTFail()
             }

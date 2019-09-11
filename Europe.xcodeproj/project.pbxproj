@@ -40,11 +40,13 @@
 		8B10BE2C2326F17600C4CE94 /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */; };
 		8B10BE2E23283E0900C4CE94 /* CountryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE2D23283E0900C4CE94 /* CountryViewModelTest.swift */; };
 		8B10BE312328458A00C4CE94 /* CountriesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE302328458A00C4CE94 /* CountriesViewModelTest.swift */; };
+		8B10BE332328E20100C4CE94 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE322328E20100C4CE94 /* UIViewController+Utils.swift */; };
+		8B10BE352328F51A00C4CE94 /* CountryErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE342328F51A00C4CE94 /* CountryErrorTest.swift */; };
 		8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */; };
 		8B4AFF502326A84E0035B2DE /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */; };
 		8B4AFF522326A8560035B2DE /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */; };
 		8B4AFF542326A85D0035B2DE /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF532326A85D0035B2DE /* SVGKit.framework */; };
-		8B4AFF562327E9760035B2DE /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF552327E9760035B2DE /* MockProvider.swift */; };
+		8B4AFF562327E9760035B2DE /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF552327E9760035B2DE /* MockManager.swift */; };
 		8B4AFF5B2327F6DC0035B2DE /* NetworkingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,11 +98,13 @@
 		8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		8B10BE2D23283E0900C4CE94 /* CountryViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModelTest.swift; sourceTree = "<group>"; };
 		8B10BE302328458A00C4CE94 /* CountriesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModelTest.swift; sourceTree = "<group>"; };
+		8B10BE322328E20100C4CE94 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
+		8B10BE342328F51A00C4CE94 /* CountryErrorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryErrorTest.swift; sourceTree = "<group>"; };
 		8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		8B4AFF4F2326A84E0035B2DE /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		8B4AFF512326A8560035B2DE /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		8B4AFF532326A85D0035B2DE /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVGKit.framework; path = Carthage/Build/iOS/SVGKit.framework; sourceTree = "<group>"; };
-		8B4AFF552327E9760035B2DE /* MockProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProvider.swift; sourceTree = "<group>"; };
+		8B4AFF552327E9760035B2DE /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +272,7 @@
 			children = (
 				8B4AFF4B2326A5420035B2DE /* UIImageView+Utils.swift */,
 				8B10BE2B2326F17600C4CE94 /* Int+Utils.swift */,
+				8B10BE322328E20100C4CE94 /* UIViewController+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -285,7 +290,7 @@
 		8B4AFF572327ED5D0035B2DE /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				8B4AFF552327E9760035B2DE /* MockProvider.swift */,
+				8B4AFF552327E9760035B2DE /* MockManager.swift */,
 				8B10BE1923254F6600C4CE94 /* FileExtractor.swift */,
 				8B10BE1623254F6600C4CE94 /* Countries.json */,
 				8B10BE1823254F6600C4CE94 /* Country.json */,
@@ -297,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				8B10BE2423256DB900C4CE94 /* CountryTest.swift */,
+				8B10BE342328F51A00C4CE94 /* CountryErrorTest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 				8B10BE272325787800C4CE94 /* CountriesViewModel.swift in Sources */,
 				8B10BDD023253EB100C4CE94 /* Europe.xcdatamodeld in Sources */,
 				8B10BDEE232540D600C4CE94 /* Coordinator.swift in Sources */,
+				8B10BE332328E20100C4CE94 /* UIViewController+Utils.swift in Sources */,
 				8B4AFF4C2326A5420035B2DE /* UIImageView+Utils.swift in Sources */,
 				8B10BE022325460400C4CE94 /* DetailsCell.swift in Sources */,
 				8B10BE092325471100C4CE94 /* NetworkProvider.swift in Sources */,
@@ -476,9 +483,10 @@
 				8B10BE1D23254F6600C4CE94 /* FileExtractor.swift in Sources */,
 				8B10BE312328458A00C4CE94 /* CountriesViewModelTest.swift in Sources */,
 				8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */,
-				8B4AFF562327E9760035B2DE /* MockProvider.swift in Sources */,
+				8B4AFF562327E9760035B2DE /* MockManager.swift in Sources */,
 				8B10BE21232551AB00C4CE94 /* CountriesProcessingTest.swift in Sources */,
 				8B10BE2E23283E0900C4CE94 /* CountryViewModelTest.swift in Sources */,
+				8B10BE352328F51A00C4CE94 /* CountryErrorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

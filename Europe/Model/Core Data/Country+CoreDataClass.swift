@@ -15,8 +15,8 @@ import SVGKit
 @objc(Country)
 public class Country: NSManagedObject, Updatable {
     
-    static var dataIdentifier: String = "alpha3Code"
-    static var objectIdentifier: String = "identifier"
+    static var dataIdentifier: String = Const.countryDataIdentifier
+    static var objectIdentifier: String = Const.countryObjectIdentifier
     
     func update(with dictionary: [String : Any]) {
         

@@ -17,10 +17,16 @@ class DataProvider {
             
             switch result {
                 
-            case .failure:
+            case .failure(let error):
                 
-                completion(allCountries())
+                let savedCountries = try? allCountries().get()
                 
+                if savedCountries?.isEmpty ?? true {
+                    completion(.failure(error))
+                } else {
+                    completion(allCountries())
+                }
+
             case .success(let data):
                 
                 DataProcessor.processCountries(with: data, completion: { (result) in
@@ -39,8 +45,8 @@ class DataProvider {
     static func obsoleteCountries(from list: [[String: Any]], in managedObjectContext: NSManagedObjectContext) -> [Country]? {
         
         let fetchRequest = countriesFetchRequest()
-        let currentCountryIdentifiers = list.compactMap{ $0["name"] as? String }
-        fetchRequest.predicate = NSPredicate(format: "NOT name IN %@", currentCountryIdentifiers)
+        let currentCountryIdentifiers = list.compactMap{ $0[Const.countryDataIdentifier] as? String }
+        fetchRequest.predicate = NSPredicate(format: "NOT %K IN %@", Const.countryObjectIdentifier, currentCountryIdentifiers)
         
         return try? fetchCountries(with: fetchRequest, in: managedObjectContext).get()
     }
@@ -54,17 +60,17 @@ extension DataProvider {
             if let countries = try moc.fetch(request) as? [Country] {
                 return .success(countries)
             } else {
-                return .failure(.fetchingError(nil))
+                return .failure(.fetchingError)
             }
             
         } catch {
-            return .failure(.fetchingError(error))
+            return .failure(.fetchingError)
         }
     }
     
     static func countriesFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Country")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Const.countryEntityName)
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         return request
     }

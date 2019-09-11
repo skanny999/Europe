@@ -16,7 +16,7 @@ class CountryViewModelTest: XCTestCase {
 
     override func setUp() {
         
-        countryViewModel = CountryViewModel(with: MockProvider.shared.mockCountry)        
+        countryViewModel = CountryViewModel(with: MockManager.shared.mockCountry)        
     }
 
     override func tearDown() {
@@ -44,16 +44,21 @@ class CountryViewModelTest: XCTestCase {
     
     func testFlagCellItem() {
         
-        let flagCellItem = FlagCellItem(with: MockProvider.shared.mockCountry)
-        
-        XCTAssertNotNil(flagCellItem.imageData)
+        let flagCellItem = FlagCellItem(with: MockManager.shared.mockCountry)
+
         XCTAssertNil(flagCellItem.title)
         XCTAssertNil(flagCellItem.body)
+        if MockManager.shared.networkIsConnected {
+            XCTAssertNotNil(flagCellItem.imageData)
+        } else {
+            XCTAssertNil(flagCellItem.imageData)
+        }
+        
     }
     
     func testNameCellItem() {
         
-        let flagCellItem = NameCellItem(with: MockProvider.shared.mockCountry)
+        let flagCellItem = NameCellItem(with: MockManager.shared.mockCountry)
         
         XCTAssertNil(flagCellItem.imageData)
         XCTAssert(flagCellItem.title == "Name")
@@ -62,7 +67,7 @@ class CountryViewModelTest: XCTestCase {
     
     func testCapitalCellItem() {
         
-        let capitalCellItem = CapitalCellItem(with: MockProvider.shared.mockCountry)
+        let capitalCellItem = CapitalCellItem(with: MockManager.shared.mockCountry)
         
         XCTAssertNil(capitalCellItem.imageData)
         XCTAssert(capitalCellItem.title == "Capital")
@@ -71,7 +76,7 @@ class CountryViewModelTest: XCTestCase {
     
     func testPopulationCellItem() {
         
-        let populationCellItem = PopulationCellItem(with: MockProvider.shared.mockCountry)
+        let populationCellItem = PopulationCellItem(with: MockManager.shared.mockCountry)
         
         XCTAssertNil(populationCellItem.imageData)
         XCTAssert(populationCellItem.title == "Population")

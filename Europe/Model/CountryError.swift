@@ -10,10 +10,10 @@ import Foundation
 
 enum CountryError: Error {
     
-    case networkingError(Error?)
-    case parsingError(Error?)
-    case fetchingError(Error?)
-    case savingError(Error?)
+    case networkingError
+    case parsingError
+    case fetchingError
+    case savingError
     case genericError
 }
 
@@ -22,17 +22,16 @@ extension CountryError: LocalizedError {
     var errorDescription: String? {
         
         switch self {
-        case .networkingError(let error):
-            return error?.localizedDescription
-        case .parsingError(let error):
-            return error?.localizedDescription
-        case .fetchingError(let error):
-            return error?.localizedDescription
-        case .savingError(let error):
-            return error?.localizedDescription
+        case .networkingError:
+            return "We couldn't get the updated european countries, please make sure you are connected to the internet."
+        case .parsingError:
+            return "There was a problem parsing the country data."
+        case .fetchingError:
+            return "There was a problem fetching the countries from Core Data."
+        case .savingError:
+            return "There was a problem saving the updated countries in Core Data."
         case .genericError:
-            return "Something went wrong"
+            return "Something went wrong."
         }
     }
-    
 }

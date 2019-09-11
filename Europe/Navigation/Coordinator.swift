@@ -36,25 +36,31 @@ extension Coordinator {
     
     func instantiateCountriesViewController() {
         
-        DataProvider.updatedCountries { (result) in
+        DataProvider.updatedCountries { [weak self] (result) in
             
             switch result {
             case .failure(let error):
-                print(error)
+                let countriesViewModel = CountriesViewModel(with: [])
+                self?.instantiateViewController(with: countriesViewModel, title: "Countries", error: error)
             case .success(let countries):
                 let countriesViewModel = CountriesViewModel(with: countries)
-                self.instantiateViewController(with: countriesViewModel, title: "Countries")
+                self?.instantiateViewController(with: countriesViewModel, title: "Countries")
             }
         }
     }
     
-    func instantiateViewController(with viewModel: TableViewModel, title: String) {
+    func instantiateViewController(with viewModel: TableViewModel, title: String, error: CountryError? = nil) {
         
         let viewController = ViewController.instantiate()
         viewController.viewModel = viewModel
         viewController.title = title
         viewController.coordinator = self
         push(viewController, animated: true)
+        if let error = error {
+            DispatchQueue.main.async {
+              viewController.showAlert(for: error)
+            }
+        }
     }
     
     func push(_ viewController: UIViewController, animated: Bool) {
