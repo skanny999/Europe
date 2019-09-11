@@ -47,7 +47,6 @@ final class CoreDataManager {
         
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         backgroundContext.parent = container.viewContext
-        container.viewContext.automaticallyMergesChangesFromParent = true
         
     }
     
