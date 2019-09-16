@@ -10,17 +10,12 @@ import UIKit
 
 protocol TableViewModel {
     
+    var title: String { get }
     var rowCount: Int { get }
-    func item(at indexPath: IndexPath) -> CellItem
-    func country(at indexPath: IndexPath) -> Country?
+    func item(at indexPath: IndexPath) -> CellViewModel
+    func destinationViewModel(for indexPath: IndexPath) -> TableViewModel?
 }
 
-extension TableViewModel {
-    
-    func country(at indexPath: IndexPath) -> Country? {
-        return nil
-    }
-}
 
 class ViewController: UIViewController, Storyboarded {
     
@@ -66,50 +61,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch viewModel {
-            
-        case is CountriesViewModel:
-            let countryCell = tableView.dequeueReusableCell(withIdentifier: CountryCell.identifier) as? CountryCell
-            countryCell?.item = viewModel?.item(at: indexPath)
-            return countryCell ?? UITableViewCell()
-            
-        case is CountryViewModel:
-            let cellItem = viewModel?.item(at: indexPath)
-            switch cellItem {
-            case is FlagCellItem:
-                let flagCell = tableView.dequeueReusableCell(withIdentifier: FlagCell.identifier) as? FlagCell
-                flagCell?.item = cellItem
-                return flagCell ?? UITableViewCell()
-            default:
-                let detailCell = tableView.dequeueReusableCell(withIdentifier: DetailsCell.identifier) as? DetailsCell
-                detailCell?.item = cellItem
-                return detailCell ?? UITableViewCell()
-            }
-        
-        default:
-            return UITableViewCell()
+        if let cellViewModel = viewModel?.item(at: indexPath),
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.identifier) as? CellLoadable {
+            cell.item = cellViewModel
+            return cell as UITableViewCell
         }
+        
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if viewModel is CountriesViewModel {
-            
-            if let country = viewModel?.country(at: indexPath) {
-               coordinator?.showDetail(for: country)
+            if let viewModel = viewModel?.destinationViewModel(for: indexPath) {
+                
+               coordinator?.pushViewController(for: viewModel)
             }
             
             tableView.deselectRow(at: indexPath, animated: true)
-        }
-
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
 

@@ -13,7 +13,7 @@ class DetailsCell: UITableViewCell, CellLoadable {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bodyLabel: UILabel!
     
-    var item: CellItem? {
+    var item: CellViewModel? {
         didSet {
             guard let item = item else { return }
             titleLabel.text = item.title

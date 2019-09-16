@@ -14,7 +14,7 @@ class CountryCell: UITableViewCell, CellLoadable {
     @IBOutlet weak var nameLabel: UILabel!
     
     
-    var item: CellItem? {
+    var item: CellViewModel? {
         didSet {
             guard let country = item else { return }
             flagImageView.setFlagImage(with: country.imageData)

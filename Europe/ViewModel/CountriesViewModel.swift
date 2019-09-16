@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct CountriesViewModel: TableViewModel {
-    
+
     private let countries: [Country]
     private var countryItems = [CountryItem]()
     
@@ -20,25 +20,32 @@ struct CountriesViewModel: TableViewModel {
         countryItems = countries.map { CountryItem(with: $0) }
     }
     
+    var title: String {
+        
+        return "Countries"
+    }
+    
     var rowCount: Int {
         
         return countryItems.count
     }
     
-    func item(at indexPath: IndexPath) -> CellItem {
+    func item(at indexPath: IndexPath) -> CellViewModel {
         
         return countryItems[indexPath.row]
     }
     
-    func country(at indexPath: IndexPath) -> Country? {
+    func destinationViewModel(for indexPath: IndexPath) -> TableViewModel? {
         
-        return countries[indexPath.row]
+        let selectedCountry = countries[indexPath.row]
+        return CountryViewModel(with: selectedCountry)
     }
 }
 
 
-struct CountryItem: CellItem {    
+struct CountryItem: CellViewModel {
     
+    var identifier: String
     var imageData: Data?
     var title: String?
     var body: String?
@@ -47,5 +54,6 @@ struct CountryItem: CellItem {
         
         self.imageData = country.flagData as Data?
         self.title = country.name ?? ""
+        self.identifier = CountryCell.identifier
     }
 }

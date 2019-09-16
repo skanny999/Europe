@@ -33,13 +33,19 @@ class CountryViewModelTest: XCTestCase {
         XCTAssertTrue(countryViewModel?.item(at: flagIndexPath) is FlagCellItem)
         
         let nameIndexPath = IndexPath(row: 1, section: 0)
-        XCTAssertTrue(countryViewModel?.item(at: nameIndexPath) is NameCellItem)
+        XCTAssertTrue(countryViewModel?.item(at: nameIndexPath) is DetailCellItem)
+        XCTAssert(countryViewModel?.item(at: nameIndexPath).title == "Name")
+        XCTAssert(countryViewModel?.item(at: nameIndexPath).body == "Åland Islands")
         
         let capitalIndexPath = IndexPath(row: 2, section: 0)
-        XCTAssertTrue(countryViewModel?.item(at: capitalIndexPath) is CapitalCellItem)
+        XCTAssertTrue(countryViewModel?.item(at: capitalIndexPath) is DetailCellItem)
+        XCTAssert(countryViewModel?.item(at: capitalIndexPath).title == "Capital")
+        XCTAssert(countryViewModel?.item(at: capitalIndexPath).body == "Mariehamn")
         
         let populationIndexPath = IndexPath(row: 3, section: 0)
-        XCTAssertTrue(countryViewModel?.item(at: populationIndexPath) is PopulationCellItem)
+        XCTAssertTrue(countryViewModel?.item(at: populationIndexPath) is DetailCellItem)
+        XCTAssert(countryViewModel?.item(at: populationIndexPath).title == "Population")
+        XCTAssert(countryViewModel?.item(at: populationIndexPath).body == "28,875")
     }
     
     func testFlagCellItem() {
@@ -53,36 +59,6 @@ class CountryViewModelTest: XCTestCase {
         } else {
             XCTAssertNil(flagCellItem.imageData)
         }
-        
     }
     
-    func testNameCellItem() {
-        
-        let flagCellItem = NameCellItem(with: MockManager.shared.mockCountry)
-        
-        XCTAssertNil(flagCellItem.imageData)
-        XCTAssert(flagCellItem.title == "Name")
-        XCTAssert(flagCellItem.body == "Åland Islands", String(describing: flagCellItem.body))
-    }
-    
-    func testCapitalCellItem() {
-        
-        let capitalCellItem = CapitalCellItem(with: MockManager.shared.mockCountry)
-        
-        XCTAssertNil(capitalCellItem.imageData)
-        XCTAssert(capitalCellItem.title == "Capital")
-        XCTAssert(capitalCellItem.body == "Mariehamn", String(describing: capitalCellItem.body))
-    }
-    
-    func testPopulationCellItem() {
-        
-        let populationCellItem = PopulationCellItem(with: MockManager.shared.mockCountry)
-        
-        XCTAssertNil(populationCellItem.imageData)
-        XCTAssert(populationCellItem.title == "Population")
-        XCTAssert(populationCellItem.body == "28,875", String(describing: populationCellItem.body))
-    }
-    
-    
-
 }

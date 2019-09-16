@@ -9,17 +9,19 @@
 import Foundation
 import UIKit
 
-protocol CellLoadable {
+protocol CellLoadable where Self: UITableViewCell {
     
     static var identifier: String { get }
     static var nib: UINib { get }
+    var item: CellViewModel? { get set }
 }
 
-protocol CellItem {
+protocol CellViewModel {
     
     var imageData: Data? { get }
     var title: String? { get }
     var body: String? { get }
+    var identifier: String { get }
 }
 
 

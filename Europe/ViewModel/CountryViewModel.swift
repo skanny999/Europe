@@ -10,75 +10,62 @@ import Foundation
 
 struct CountryViewModel: TableViewModel {
     
+    private var cellItems = [CellViewModel]()
+    
     init(with country: Country) {
         
+        self.title = country.name ?? ""
         cellItems.append(FlagCellItem(with: country))
-        cellItems.append(NameCellItem(with: country))
-        cellItems.append(CapitalCellItem(with: country))
-        cellItems.append(PopulationCellItem(with: country))
+        cellItems.append(DetailCellItem(title: "Name", body: country.name))
+        cellItems.append(DetailCellItem(title: "Capital", body: country.capital))
+        cellItems.append(DetailCellItem(title: "Population", body: country.population.stringValue))
     }
     
-    private var cellItems = [CellItem]()
+    var title: String
     
     var rowCount: Int {
         
         return 4
     }
     
-    func item(at indexPath: IndexPath) -> CellItem {
+    func item(at indexPath: IndexPath) -> CellViewModel {
 
         return cellItems[indexPath.row]
+    }
+    
+    func destinationViewModel(for indexPath: IndexPath) -> TableViewModel? {
+        return nil
     }
 }
 
 
-struct FlagCellItem: CellItem {
+struct FlagCellItem: CellViewModel {
     
     var imageData: Data?
     var title: String?
     var body: String?
+    var identifier: String
     
     init(with country: Country) {
         
         self.imageData = country.flagData as Data?
+        self.identifier = FlagCell.identifier
     }
 }
 
-struct NameCellItem: CellItem {
+struct DetailCellItem: CellViewModel {
     
+    var identifier: String
     var imageData: Data?
     var title: String?
     var body: String?
     
-    init(with country: Country) {
-        
-        self.title = "Name"
-        self.body = country.name
+    init(title: String, body: String?) {
+        self.title = title
+        self.body = body
+        self.identifier = DetailsCell.identifier
     }
 }
 
-struct CapitalCellItem: CellItem {
-    
-    var imageData: Data?
-    var title: String?
-    var body: String?
-    
-    init(with country: Country) {
-        
-        self.title = "Capital"
-        self.body = country.capital
-    }
-}
 
-struct PopulationCellItem: CellItem {
-    
-    var imageData: Data?
-    var title: String?
-    var body: String?
-    
-    init(with country: Country) {
-        
-        self.title = "Population"
-        self.body = country.population.stringValue
-    }
-}
+

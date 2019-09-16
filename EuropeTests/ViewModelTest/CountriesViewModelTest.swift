@@ -37,7 +37,8 @@ class CountriesViewModelTest: XCTestCase {
     func testCountryAtIndexPath() {
         
         let indexPath = IndexPath(row: 0, section: 0)
-        XCTAssert(countriesViewModel?.country(at: indexPath) === MockManager.shared.mockCountry)
+
+        XCTAssert(countriesViewModel?.destinationViewModel(for: indexPath)?.title == MockManager.shared.mockCountry.name)
     }
     
     func testCountryItem() {

@@ -24,10 +24,9 @@ class Coordinator {
         instantiateCountriesViewController()
     }
     
-    func showDetail(for country: Country) {
+    func pushViewController(for viewModel: TableViewModel) {
         
-        let countryViewModel = CountryViewModel(with: country)
-        instantiateViewController(with: countryViewModel, title: country.name ?? "")
+        instantiateViewController(with: viewModel)
     }
 }
 
@@ -41,19 +40,19 @@ extension Coordinator {
             switch result {
             case .failure(let error):
                 let countriesViewModel = CountriesViewModel(with: [])
-                self?.instantiateViewController(with: countriesViewModel, title: "Countries", error: error)
+                self?.instantiateViewController(with: countriesViewModel, error: error)
             case .success(let countries):
                 let countriesViewModel = CountriesViewModel(with: countries)
-                self?.instantiateViewController(with: countriesViewModel, title: "Countries")
+                self?.instantiateViewController(with: countriesViewModel)
             }
         }
     }
     
-    func instantiateViewController(with viewModel: TableViewModel, title: String, error: CountryError? = nil) {
+    func instantiateViewController(with viewModel: TableViewModel, error: CountryError? = nil) {
         
         let viewController = ViewController.instantiate()
         viewController.viewModel = viewModel
-        viewController.title = title
+        viewController.title = viewModel.title
         viewController.coordinator = self
         push(viewController, animated: true)
         if let error = error {

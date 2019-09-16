@@ -12,7 +12,7 @@ class FlagCell: UITableViewCell, CellLoadable {
     
     @IBOutlet weak var flagImageView: UIImageView!
     
-    var item: CellItem? {
+    var item: CellViewModel? {
         didSet {
             guard let flagItem = item else { return }
             flagImageView.setFlagImage(with: flagItem.imageData)

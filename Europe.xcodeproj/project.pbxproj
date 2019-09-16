@@ -48,6 +48,7 @@
 		8B4AFF542326A85D0035B2DE /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4AFF532326A85D0035B2DE /* SVGKit.framework */; };
 		8B4AFF562327E9760035B2DE /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF552327E9760035B2DE /* MockManager.swift */; };
 		8B4AFF5B2327F6DC0035B2DE /* NetworkingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */; };
+		8BA76A61233038120045B034 /* CoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA76A60233038120045B034 /* CoordinatorTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		8B4AFF532326A85D0035B2DE /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVGKit.framework; path = Carthage/Build/iOS/SVGKit.framework; sourceTree = "<group>"; };
 		8B4AFF552327E9760035B2DE /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTest.swift; sourceTree = "<group>"; };
+		8BA76A60233038120045B034 /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 		8B10BDDE23253EB300C4CE94 /* EuropeTests */ = {
 			isa = PBXGroup;
 			children = (
+				8BA76A60233038120045B034 /* CoordinatorTest.swift */,
 				8B4AFF572327ED5D0035B2DE /* Mock */,
 				8B4AFF592327EE000035B2DE /* Services */,
 				8B4AFF582327EDD70035B2DE /* Model */,
@@ -483,6 +486,7 @@
 				8B10BE1D23254F6600C4CE94 /* FileExtractor.swift in Sources */,
 				8B10BE312328458A00C4CE94 /* CountriesViewModelTest.swift in Sources */,
 				8B10BE2523256DB900C4CE94 /* CountryTest.swift in Sources */,
+				8BA76A61233038120045B034 /* CoordinatorTest.swift in Sources */,
 				8B4AFF562327E9760035B2DE /* MockManager.swift in Sources */,
 				8B10BE21232551AB00C4CE94 /* CountriesProcessingTest.swift in Sources */,
 				8B10BE2E23283E0900C4CE94 /* CountryViewModelTest.swift in Sources */,
