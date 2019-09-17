@@ -18,9 +18,16 @@ extension URLSession: URLSessionProtocol {}
 
 class NetworkProvider {
     
-    static func getCountries(urlSession: URLSessionProtocol = URLSession.shared, completion: @escaping (Result<Data, CountryError>) -> Void) {
+    let urlSession: URLSessionProtocol
+    
+    init(with urlSession: URLSessionProtocol = URLSession.shared) {
         
-        let task = urlSession.dataTask(with: Const.europeUrl) { (data, response, error) in
+        self.urlSession = urlSession
+    }
+    
+    func getCountries(completion: @escaping (Result<Data, CountryError>) -> Void) {
+        
+        let task = self.urlSession.dataTask(with: Const.europeUrl) { (data, response, error) in
             
             if error != nil {
                 completion(.failure(.networkingError))

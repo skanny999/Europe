@@ -9,31 +9,31 @@
 import Foundation
 import CoreData
 
-class DataProcessor {
+class CoreDataProcessor {
     
-    static func processCountries(with data: Data, completion: @escaping (Result<[Country], CountryError>) -> Void) {
+    func processManagedObjects<T: Updatable>(ofType: T.Type, with data: Data, completion: @escaping (Result<Bool, CountryError>) -> Void) {
         
         if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
             
             let group = DispatchGroup()
             
-            for countryData in json {
+            for objectData in json {
                 
                 group.enter()
                 CoreDataManager.shared.performBackgroundTask { (backgroundContext) in
                     
-                    Country.managedObject(dictionary: countryData, in: backgroundContext)
+                    T.managedObject(dictionary: objectData, in: backgroundContext)
                     group.leave()
                 }
             }
             
             group.notify(queue: .global()) {
                 
-                self.deleteObsoleteCountries(from: json) {
+                self.deleteObsoleteObjects(ofType: T.self, from: json) {
                     
                     do {
                         try CoreDataManager.shared.save()
-                        completion(DataProvider.allCountries())
+                        completion(.success(true))
                     } catch {
                         completion(.failure(.parsingError))
                     }
@@ -42,15 +42,19 @@ class DataProcessor {
         }
     }
     
-    private static func deleteObsoleteCountries(from list: [[String: Any]], completion: @escaping () -> Void) {
+    func deleteObsoleteObjects<T: Updatable>(ofType: T.Type, from list: [[String: Any]], completion: @escaping () -> Void) {
 
         CoreDataManager.shared.performBackgroundTask { (backgroundContext) in
 
-            if let result = DataProvider.obsoleteCountries(from: list, in: backgroundContext) {
+            let currentCountryIdentifiers = list.compactMap{ $0[T.dataIdentifier] as? String }
+            let request = T.fetchRequest()
+            request.predicate = NSPredicate(format: "NOT %K IN %@", T.objectIdentifier, currentCountryIdentifiers)
 
-                for country in result {
+            if let obsoleteCountries = try? backgroundContext.fetch(request) as? [T] {
 
-                    backgroundContext.delete(country)
+                for object in obsoleteCountries {
+
+                    backgroundContext.delete(object)
                 }
             }
 
@@ -97,10 +101,11 @@ extension Updatable where Self: NSManagedObject {
         
         return try? context.fetch(fetchRequest(forId: id)).first as? Self ?? nil
     }
+
     
     private static func fetchRequest(forId id: String) -> NSFetchRequest<NSFetchRequestResult> {
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Const.countryEntityName)
+        let request = Self.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         request.predicate = NSPredicate(format: "%K == %@", objectIdentifier, id)
         return request

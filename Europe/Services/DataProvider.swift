@@ -13,7 +13,9 @@ class DataProvider {
     
     static func updatedCountries(completion: @escaping (Result<[Country], CountryError>) -> Void) {
         
-        NetworkProvider.getCountries { (result) in
+        let networkProvider = NetworkProvider()
+        
+        networkProvider.getCountries { (result) in
             
             switch result {
                 
@@ -29,9 +31,14 @@ class DataProvider {
 
             case .success(let data):
                 
-                DataProcessor.processCountries(with: data, completion: { (result) in
-                    
-                    completion(result)
+                let processor = CoreDataProcessor()
+                processor.processManagedObjects(ofType: Country.self, with: data, completion: { (result) in
+                    switch result {
+                    case .success:
+                        completion(allCountries())
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 })
             }
         }

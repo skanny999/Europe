@@ -13,6 +13,7 @@ class NetworkingTest: XCTestCase {
 
     override func setUp() {
 
+
     }
 
     override func tearDown() {
@@ -26,7 +27,9 @@ class NetworkingTest: XCTestCase {
         
         let expect = expectation(description: "ErrorTest")
         
-        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+        let networkProvider = NetworkProvider(with: mockSession)
+        
+        networkProvider.getCountries { (result) in
             
             switch result {
             case .failure(let error):
@@ -47,9 +50,11 @@ class NetworkingTest: XCTestCase {
         let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 400, httpVersion: nil, headerFields: nil)
         let mockSession = URLSessionMock(data: nil, response: response, error: nil)
         
+        let networkProvider = NetworkProvider(with: mockSession)
+        
         let expect = expectation(description: "ErrorTest")
         
-        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+        networkProvider.getCountries { (result) in
             
             switch result {
             case .failure(let error):
@@ -70,9 +75,11 @@ class NetworkingTest: XCTestCase {
         let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         let mockSession = URLSessionMock(jsonDict: ["Mock":"Data" as AnyObject], response: response, error: nil)!
         
+        let networkProvider = NetworkProvider(with: mockSession)
+        
         let expect = expectation(description: "ErrorTest")
         
-        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+        networkProvider.getCountries { (result) in
             
             switch result {
             case .failure:
@@ -93,9 +100,11 @@ class NetworkingTest: XCTestCase {
         let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 400, httpVersion: nil, headerFields: nil)
         let mockSession = URLSessionMock(jsonDict: ["Mock":"Data" as AnyObject], response: response, error: nil)!
         
+        let networkProvider = NetworkProvider(with: mockSession)
+        
         let expect = expectation(description: "ErrorTest")
         
-        NetworkProvider.getCountries(urlSession: mockSession) { (result) in
+        networkProvider.getCountries { (result) in
             
             switch result {
             case .failure(let error):
