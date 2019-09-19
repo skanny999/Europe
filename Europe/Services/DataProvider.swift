@@ -14,8 +14,15 @@ typealias CountriesResult = (Result<[Country], CountryError>) -> Void
 
 class DataProvider {
     
-    let updateProcessor = UpdateProcessor()
-    let viewContext = CoreDataManager.shared.mainContext
+    let updateProcessor: UpdateProcessor
+    let coreDataProvider: CoreDataProvider
+    
+    init(updateProcessor: UpdateProcessor = UpdateProcessor(), coreDataProvider: CoreDataProvider = CoreDataManager.shared) {
+        
+        self.updateProcessor = updateProcessor
+        self.coreDataProvider = coreDataProvider
+    }
+    
     
     func getCountries(completion: @escaping CountriesResult) {
         
@@ -46,7 +53,7 @@ class DataProvider {
     
     func fetchAllCountries() -> Result<[Country], CountryError> {
         
-        return fetchCountries(with: countriesFetchRequest(), in: viewContext)
+        return fetchCountries(with: countriesFetchRequest(), in: coreDataProvider.mainContext)
     }
 }
 

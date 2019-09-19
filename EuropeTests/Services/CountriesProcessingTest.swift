@@ -11,9 +11,11 @@ import CoreData
 @testable import Europe
 
 class CountriesProcessingTest: XCTestCase {
+    
+    var dataProvider: DataProvider?
 
     override func setUp() {
-
+        dataProvider = DataProvider()
     }
 
     override func tearDown() {
@@ -29,7 +31,7 @@ class CountriesProcessingTest: XCTestCase {
         
         processor.processManagedObjects(ofType: Country.self, with: data) { (result) in
             
-            let countries = try! DataProvider.allCountries().get()
+            let countries = try! self.dataProvider!.fetchAllCountries().get()
             
             XCTAssert(countries.count == 2, "\(countries.count)")
             
@@ -50,7 +52,7 @@ class CountriesProcessingTest: XCTestCase {
         
         processor.processManagedObjects(ofType: Country.self, with: countryData) { (result) in
             
-            let countries = try! DataProvider.allCountries().get()
+            let countries = try! self.dataProvider!.fetchAllCountries().get()
             
             XCTAssert(countries.count == 1, "\(countries.count)")
             XCTAssert(countries.first?.name == "Åland Islands")

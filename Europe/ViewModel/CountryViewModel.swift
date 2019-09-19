@@ -25,7 +25,7 @@ struct CountryViewModel: TableViewModel {
     
     var rowCount: Int {
         
-        return 4
+        return cellItems.count
     }
     
     func item(at indexPath: IndexPath) -> CellViewModel {

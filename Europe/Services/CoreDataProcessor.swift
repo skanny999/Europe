@@ -11,6 +11,7 @@ import CoreData
 
 protocol CoreDataProvider {
     
+    var mainContext: NSManagedObjectContext { get }
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
 }
 
