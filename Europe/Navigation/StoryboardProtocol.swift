@@ -19,8 +19,7 @@ extension Storyboarded where Self: UIViewController {
         
         let className = NSStringFromClass(self).components(separatedBy: ".")[1]
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
+
         return storyboard.instantiateViewController(withIdentifier: className) as! Self
     }
-    
 }

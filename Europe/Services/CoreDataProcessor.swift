@@ -9,7 +9,19 @@
 import Foundation
 import CoreData
 
+protocol CoreDataProvider {
+    
+    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
+}
+
 class CoreDataProcessor {
+    
+    private let coreDataProvider: CoreDataProvider
+    
+    init(with provider: CoreDataProvider = CoreDataManager.shared) {
+        
+        self.coreDataProvider = provider
+    }
     
     func processManagedObjects<T: Updatable>(ofType: T.Type, with data: Data, completion: @escaping (Result<Bool, CountryError>) -> Void) {
         
@@ -20,7 +32,7 @@ class CoreDataProcessor {
             for objectData in json {
                 
                 group.enter()
-                CoreDataManager.shared.performBackgroundTask { (backgroundContext) in
+                coreDataProvider.performBackgroundTask { (backgroundContext) in
                     
                     T.managedObject(dictionary: objectData, in: backgroundContext)
                     group.leave()
@@ -42,9 +54,9 @@ class CoreDataProcessor {
         }
     }
     
-    func deleteObsoleteObjects<T: Updatable>(ofType: T.Type, from list: [[String: Any]], completion: @escaping () -> Void) {
+    private func deleteObsoleteObjects<T: Updatable>(ofType: T.Type, from list: [[String: Any]], completion: @escaping () -> Void) {
 
-        CoreDataManager.shared.performBackgroundTask { (backgroundContext) in
+        coreDataProvider.performBackgroundTask { (backgroundContext) in
 
             let currentCountryIdentifiers = list.compactMap{ $0[T.dataIdentifier] as? String }
             let request = T.fetchRequest()
@@ -57,7 +69,6 @@ class CoreDataProcessor {
                     backgroundContext.delete(object)
                 }
             }
-
             completion()
         }
     }
@@ -106,7 +117,7 @@ extension Updatable where Self: NSManagedObject {
     private static func fetchRequest(forId id: String) -> NSFetchRequest<NSFetchRequestResult> {
         
         let request = Self.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        request.sortDescriptors = []
         request.predicate = NSPredicate(format: "%K == %@", objectIdentifier, id)
         return request
     }

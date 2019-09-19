@@ -35,7 +35,9 @@ extension Coordinator {
     
     func instantiateCountriesViewController() {
         
-        DataProvider.updatedCountries { [weak self] (result) in
+        let dataProvider = DataProvider()
+        
+        dataProvider.getCountries { [weak self] (result) in
             
             switch result {
             case .failure(let error):
@@ -50,14 +52,14 @@ extension Coordinator {
     
     func instantiateViewController(with viewModel: TableViewModel, error: CountryError? = nil) {
         
-        let viewController = ViewController.instantiate()
-        viewController.viewModel = viewModel
-        viewController.title = viewModel.title
-        viewController.coordinator = self
-        push(viewController, animated: true)
-        if let error = error {
-            DispatchQueue.main.async {
-              viewController.showAlert(for: error)
+        DispatchQueue.main.async { [weak self] in
+            let viewController = ViewController.instantiate()
+            viewController.viewModel = viewModel
+            viewController.title = viewModel.title
+            viewController.coordinator = self
+            self?.push(viewController, animated: true)
+            if let error = error {
+                  viewController.showAlert(for: error)
             }
         }
     }

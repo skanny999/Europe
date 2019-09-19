@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-final class CoreDataManager {
+final class CoreDataManager: CoreDataProvider {
     
     private static var manager: CoreDataManager?
     private var container: NSPersistentContainer

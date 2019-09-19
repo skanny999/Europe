@@ -9,59 +9,50 @@
 import Foundation
 import CoreData
 
+typealias CountriesResult = (Result<[Country], CountryError>) -> Void
+
+
 class DataProvider {
     
-    static func updatedCountries(completion: @escaping (Result<[Country], CountryError>) -> Void) {
+    let updateProcessor = UpdateProcessor()
+    let viewContext = CoreDataManager.shared.mainContext
+    
+    func getCountries(completion: @escaping CountriesResult) {
         
-        let networkProvider = NetworkProvider()
-        
-        networkProvider.getCountries { (result) in
+        updateProcessor.updateCountries { (countriesUpdateResult) in
             
-            switch result {
+            let allCountriesFetchResult = self.fetchAllCountries()
+            
+            switch (countriesUpdateResult, allCountriesFetchResult) {
                 
-            case .failure(let error):
+            case (.success, .failure(let fetchError)):
+                print("couldn't fetch countries")
+                completion(.failure(fetchError))
                 
-                let savedCountries = try? allCountries().get()
+            case (.failure, .failure(let fetchError)):
+                print("couldn't updated countries and there's none in memory")
+                completion(.failure(fetchError))
                 
-                if savedCountries?.isEmpty ?? true {
-                    completion(.failure(error))
-                } else {
-                    completion(allCountries())
-                }
+            case (.failure(let updateError), .success(let countries)):
+                print("couldn't update countries \(updateError.localizedDescription)")
+                countries.isEmpty ? completion(.failure(updateError)) : completion(.success(countries))
 
-            case .success(let data):
-                
-                let processor = CoreDataProcessor()
-                processor.processManagedObjects(ofType: Country.self, with: data, completion: { (result) in
-                    switch result {
-                    case .success:
-                        completion(allCountries())
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                })
+            case (.success, .success(let countries)):
+                completion(.success(countries))
             }
         }
     }
     
-    static func allCountries() -> Result<[Country], CountryError> {
-        
-        return fetchCountries(with: countriesFetchRequest(), in: CoreDataManager.shared.mainContext)
-    }
     
-    static func obsoleteCountries(from list: [[String: Any]], in managedObjectContext: NSManagedObjectContext) -> [Country]? {
+    func fetchAllCountries() -> Result<[Country], CountryError> {
         
-        let fetchRequest = countriesFetchRequest()
-        let currentCountryIdentifiers = list.compactMap{ $0[Const.countryDataIdentifier] as? String }
-        fetchRequest.predicate = NSPredicate(format: "NOT %K IN %@", Const.countryObjectIdentifier, currentCountryIdentifiers)
-        
-        return try? fetchCountries(with: fetchRequest, in: managedObjectContext).get()
+        return fetchCountries(with: countriesFetchRequest(), in: viewContext)
     }
 }
 
 extension DataProvider {
     
-    static func fetchCountries(with request: NSFetchRequest<NSFetchRequestResult>, in moc: NSManagedObjectContext) -> Result<[Country], CountryError> {
+    func fetchCountries(with request: NSFetchRequest<NSFetchRequestResult>, in moc: NSManagedObjectContext) -> Result<[Country], CountryError> {
         
         do {
             if let countries = try moc.fetch(request) as? [Country] {
@@ -75,9 +66,9 @@ extension DataProvider {
         }
     }
     
-    static func countriesFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
+    func countriesFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Const.countryEntityName)
+        let request: NSFetchRequest<NSFetchRequestResult> = Country.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         return request
     }
