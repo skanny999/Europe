@@ -48,6 +48,7 @@
 		8B4AFF562327E9760035B2DE /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF552327E9760035B2DE /* MockManager.swift */; };
 		8B4AFF5B2327F6DC0035B2DE /* NetworkingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */; };
 		8B61061523323487003E671C /* CoreDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10BE1223254AEC00C4CE94 /* CoreDataProcessor.swift */; };
+		8B6E991023352A4E00D7E756 /* ServicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E990F23352A4E00D7E756 /* ServicesProtocols.swift */; };
 		8B9460162332CE9A00BE9969 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9460152332CE9A00BE9969 /* UpdateManager.swift */; };
 		8BA76A61233038120045B034 /* CoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA76A60233038120045B034 /* CoordinatorTest.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		8B4AFF532326A85D0035B2DE /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVGKit.framework; path = Carthage/Build/iOS/SVGKit.framework; sourceTree = "<group>"; };
 		8B4AFF552327E9760035B2DE /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		8B4AFF5A2327F6DC0035B2DE /* NetworkingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTest.swift; sourceTree = "<group>"; };
+		8B6E990F23352A4E00D7E756 /* ServicesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesProtocols.swift; sourceTree = "<group>"; };
 		8B9460152332CE9A00BE9969 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		8BA76A60233038120045B034 /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,8 +230,9 @@
 		8B10BE0A2325471900C4CE94 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8B10BE082325471100C4CE94 /* NetworkProvider.swift */,
+				8B6E990F23352A4E00D7E756 /* ServicesProtocols.swift */,
 				8B10BE1023254AE100C4CE94 /* DataProvider.swift */,
+				8B10BE082325471100C4CE94 /* NetworkProvider.swift */,
 				8B9460152332CE9A00BE9969 /* UpdateManager.swift */,
 				8B10BE1223254AEC00C4CE94 /* CoreDataProcessor.swift */,
 				8B10BE1423254C3500C4CE94 /* CoreDataManager.swift */,
@@ -475,6 +478,7 @@
 				8B10BE0E232547B900C4CE94 /* CountryError.swift in Sources */,
 				8B10BE1123254AE100C4CE94 /* DataProvider.swift in Sources */,
 				8B10BDC823253EB100C4CE94 /* AppDelegate.swift in Sources */,
+				8B6E991023352A4E00D7E756 /* ServicesProtocols.swift in Sources */,
 				8B9460162332CE9A00BE9969 /* UpdateManager.swift in Sources */,
 				8B10BE062325467D00C4CE94 /* Country+CoreDataClass.swift in Sources */,
 				8B10BE1523254C3500C4CE94 /* CoreDataManager.swift in Sources */,

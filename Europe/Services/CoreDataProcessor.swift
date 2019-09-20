@@ -9,13 +9,8 @@
 import Foundation
 import CoreData
 
-protocol CoreDataProvider {
-    
-    var mainContext: NSManagedObjectContext { get }
-    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
-}
 
-class CoreDataProcessor {
+class CoreDataProcessor: DataProcessor {
     
     private let coreDataProvider: CoreDataProvider
     
@@ -24,7 +19,7 @@ class CoreDataProcessor {
         self.coreDataProvider = provider
     }
     
-    func processManagedObjects<T: Updatable>(ofType: T.Type, with data: Data, completion: @escaping (Result<Bool, CountryError>) -> Void) {
+    func processObjects<T: Updatable>(ofType: T.Type, with data: Data, completion: @escaping (Result<Bool, CountryError>) -> Void) {
         
         if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
             

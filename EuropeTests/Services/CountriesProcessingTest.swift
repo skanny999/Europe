@@ -29,9 +29,9 @@ class CountriesProcessingTest: XCTestCase {
         let data = FileExtractor.extractJsonFile(withName: "Countries", forClass: type(of: self))
         let processor = CoreDataProcessor()
         
-        processor.processManagedObjects(ofType: Country.self, with: data) { (result) in
+        processor.processObjects(ofType: Country.self, with: data) { (result) in
             
-            let countries = try! self.dataProvider!.fetchAllCountries().get()
+            let countries = try! self.dataProvider!.storedDataProvider.allCountries().get()
             
             XCTAssert(countries.count == 2, "\(countries.count)")
             
@@ -50,9 +50,9 @@ class CountriesProcessingTest: XCTestCase {
         
         let countryData = FileExtractor.extractJsonFile(withName: "Country", forClass: type(of: self))
         
-        processor.processManagedObjects(ofType: Country.self, with: countryData) { (result) in
+        processor.processObjects(ofType: Country.self, with: countryData) { (result) in
             
-            let countries = try! self.dataProvider!.fetchAllCountries().get()
+            let countries = try! self.dataProvider!.storedDataProvider.allCountries().get()
             
             XCTAssert(countries.count == 1, "\(countries.count)")
             XCTAssert(countries.first?.name == "Åland Islands")

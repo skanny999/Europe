@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+
 final class CoreDataManager: CoreDataProvider {
     
     private static var manager: CoreDataManager?
@@ -74,6 +75,38 @@ final class CoreDataManager: CoreDataProvider {
         description.shouldAddStoreAsynchronously = false
         container.persistentStoreDescriptions = [description]
     }
+}
+
+
+extension CoreDataManager: StoredDataProvider {
+    
+    func allCountries() -> Result<[Country], CountryError> {
+        
+        return fetchCountries(with: countriesFetchRequest(), in: mainContext)
+    }
+    
+    
+    private func fetchCountries(with request: NSFetchRequest<NSFetchRequestResult>, in moc: NSManagedObjectContext) -> Result<[Country], CountryError> {
+         
+         do {
+             if let countries = try moc.fetch(request) as? [Country] {
+                 return .success(countries)
+             } else {
+                 return .failure(.fetchingError)
+             }
+             
+         } catch {
+             return .failure(.fetchingError)
+         }
+     }
+     
+     private func countriesFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
+         
+         let request: NSFetchRequest<NSFetchRequestResult> = Country.fetchRequest()
+         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+         return request
+     }
+    
 }
 
 

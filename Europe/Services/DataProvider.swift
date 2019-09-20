@@ -11,16 +11,16 @@ import CoreData
 
 typealias CountriesResult = (Result<[Country], CountryError>) -> Void
 
-
 class DataProvider {
     
     let updateProcessor: UpdateProcessor
-    let coreDataProvider: CoreDataProvider
+    let storedDataProvider: StoredDataProvider
     
-    init(updateProcessor: UpdateProcessor = UpdateProcessor(), coreDataProvider: CoreDataProvider = CoreDataManager.shared) {
+    init(updateProcessor: UpdateProcessor = UpdateProcessor(),
+         storedDataProvider: StoredDataProvider = CoreDataManager.shared) {
         
         self.updateProcessor = updateProcessor
-        self.coreDataProvider = coreDataProvider
+        self.storedDataProvider = storedDataProvider
     }
     
     
@@ -28,9 +28,9 @@ class DataProvider {
         
         updateProcessor.updateCountries { (countriesUpdateResult) in
             
-            let allCountriesFetchResult = self.fetchAllCountries()
+            let allCountriesResult = self.storedDataProvider.allCountries()
             
-            switch (countriesUpdateResult, allCountriesFetchResult) {
+            switch (countriesUpdateResult, allCountriesResult) {
                 
             case (.success, .failure(let fetchError)):
                 print("couldn't fetch countries")
@@ -49,34 +49,7 @@ class DataProvider {
             }
         }
     }
-    
-    
-    func fetchAllCountries() -> Result<[Country], CountryError> {
-        
-        return fetchCountries(with: countriesFetchRequest(), in: coreDataProvider.mainContext)
-    }
+
 }
 
-extension DataProvider {
-    
-    func fetchCountries(with request: NSFetchRequest<NSFetchRequestResult>, in moc: NSManagedObjectContext) -> Result<[Country], CountryError> {
-        
-        do {
-            if let countries = try moc.fetch(request) as? [Country] {
-                return .success(countries)
-            } else {
-                return .failure(.fetchingError)
-            }
-            
-        } catch {
-            return .failure(.fetchingError)
-        }
-    }
-    
-    func countriesFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
-        
-        let request: NSFetchRequest<NSFetchRequestResult> = Country.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        return request
-    }
-}
+

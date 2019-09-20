@@ -8,15 +8,14 @@
 
 import Foundation
 
-
 class UpdateProcessor {
     
     let networkProvider: NetworkProvider
-    let coreDataProcessor: CoreDataProcessor
+    let dataProcessor: DataProcessor
     
     init(with networkProvider: NetworkProvider = NetworkProvider()) {
         self.networkProvider = networkProvider
-        self.coreDataProcessor = CoreDataProcessor()
+        self.dataProcessor = CoreDataProcessor()
     }
     
     func updateCountries(completion: @escaping (Result<Bool, CountryError>) -> Void) {
@@ -28,7 +27,7 @@ class UpdateProcessor {
                 completion(.failure(error))
                 
             case .success(let data):
-                self.coreDataProcessor.processManagedObjects(ofType: Country.self, with: data) { (result) in
+                self.dataProcessor.processObjects(ofType: Country.self, with: data) { (result) in
                     
                     switch result {
                     case .failure(let error):
