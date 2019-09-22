@@ -12,6 +12,7 @@ protocol TableViewModel {
     
     var title: String { get }
     var rowCount: Int { get }
+    var update: (CountryError?) -> Void { get set }
     func item(at indexPath: IndexPath) -> CellViewModel
     func destinationViewModel(for indexPath: IndexPath) -> TableViewModel?
 }
@@ -31,6 +32,7 @@ class ViewController: UIViewController, Storyboarded {
         setDelegates()
         configureBackButton()
         tableView.separatorStyle = .none
+        configureUpdater()
     }
     
     private func registerCells() {
@@ -48,6 +50,21 @@ class ViewController: UIViewController, Storyboarded {
     
     private func configureBackButton() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    private func configureUpdater() {
+        
+        viewModel?.update = { error in
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.showAlert(for: error)
+                } else {
+                    self.tableView.reloadData()
+                }
+            }
+
+        }
     }
 }
 

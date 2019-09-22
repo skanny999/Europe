@@ -34,23 +34,14 @@ class Coordinator {
 extension Coordinator {
     
     func instantiateCountriesViewController() {
-        
+
         let dataProvider = DataProvider()
-        
-        dataProvider.getCountries { [weak self] (result) in
-            
-            switch result {
-            case .failure(let error):
-                let countriesViewModel = CountriesViewModel(with: [])
-                self?.instantiateViewController(with: countriesViewModel, error: error)
-            case .success(let countries):
-                let countriesViewModel = CountriesViewModel(with: countries)
-                self?.instantiateViewController(with: countriesViewModel)
-            }
-        }
+        let storedCountries = dataProvider.storedCountries()
+        let countriesViewModel = CountriesViewModel(with: storedCountries)
+        instantiateViewController(with: countriesViewModel)
     }
     
-    func instantiateViewController(with viewModel: TableViewModel, error: CountryError? = nil) {
+    func instantiateViewController(with viewModel: TableViewModel) {
         
         DispatchQueue.main.async { [weak self] in
             let viewController = ViewController.instantiate()
@@ -58,9 +49,6 @@ extension Coordinator {
             viewController.title = viewModel.title
             viewController.coordinator = self
             self?.push(viewController, animated: true)
-            if let error = error {
-                  viewController.showAlert(for: error)
-            }
         }
     }
     

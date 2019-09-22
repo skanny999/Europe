@@ -21,6 +21,8 @@ struct CountryViewModel: TableViewModel {
         cellItems.append(DetailCellItem(title: "Population", body: country.population.stringValue))
     }
     
+    var update: (CountryError?) -> Void = {_ in}
+    
     var title: String
     
     var rowCount: Int {

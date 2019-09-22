@@ -23,6 +23,11 @@ class DataProvider {
         self.storedDataProvider = storedDataProvider
     }
     
+    func storedCountries() -> [Country] {
+        
+        let storedCountries = try? storedDataProvider.allCountries().get()
+        return storedCountries ?? []
+    }
     
     func getCountries(completion: @escaping CountriesResult) {
         

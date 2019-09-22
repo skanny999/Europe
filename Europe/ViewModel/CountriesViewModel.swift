@@ -9,16 +9,47 @@
 import Foundation
 import UIKit
 
-struct CountriesViewModel: TableViewModel {
+class CountriesViewModel: TableViewModel {    
 
-    private let countries: [Country]
+    private var countries: [Country]
     private var countryItems = [CountryItem]()
+    private let dataProvider: DataProvider
     
-    init(with countries: [Country]) {
+    init(with countries: [Country], provider: DataProvider = DataProvider()) {
         
+        self.dataProvider = provider
+        self.countries = countries
+        countryItems = countries.map { CountryItem(with: $0) }
+        updateCountries()
+    }
+    
+    private func configureCountryItems(with countries: [Country]) {
         self.countries = countries
         countryItems = countries.map { CountryItem(with: $0) }
     }
+    
+    func updateCountries() {
+        
+        dataProvider.getCountries { (countriesResult) in
+            
+            switch countriesResult {
+                
+            case .failure(let error):
+                if self.countries.isEmpty {
+                    print(error)
+                }
+                
+            case .success(let updatedCountries):
+                if self.countries != updatedCountries {
+                    self.countries = updatedCountries
+                    self.countryItems = self.countries.map { CountryItem(with: $0) }
+                    self.update(nil)
+                }
+            }
+        }
+    }
+    
+    var update: (CountryError?) -> Void = { _ in }
     
     var title: String {
         
