@@ -30,7 +30,7 @@ class CountriesViewModel: TableViewModel {
     
     func updateCountries() {
         
-        dataProvider.getCountries { (countriesResult) in
+        dataProvider.updatedCountries { (countriesResult) in
             
             switch countriesResult {
                 

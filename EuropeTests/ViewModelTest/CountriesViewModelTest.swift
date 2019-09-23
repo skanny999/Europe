@@ -15,7 +15,7 @@ class CountriesViewModelTest: XCTestCase {
 
     override func setUp() {
         
-        let countries = [MockManager.shared.mockCountry, MockManager.shared.mockCountry, MockManager.shared.mockCountry]
+        let countries = [CountriesMockManager.shared.mockCountry, CountriesMockManager.shared.mockCountry, CountriesMockManager.shared.mockCountry]
         countriesViewModel = CountriesViewModel(with: countries)
     }
 
@@ -38,15 +38,15 @@ class CountriesViewModelTest: XCTestCase {
         
         let indexPath = IndexPath(row: 0, section: 0)
 
-        XCTAssert(countriesViewModel?.destinationViewModel(for: indexPath)?.title == MockManager.shared.mockCountry.name)
+        XCTAssert(countriesViewModel?.destinationViewModel(for: indexPath)?.title == CountriesMockManager.shared.mockCountry.name)
     }
     
     func testCountryItem() {
         
-        let countryItem = CountryItem(with: MockManager.shared.mockCountry)
+        let countryItem = CountryItem(with: CountriesMockManager.shared.mockCountry)
         XCTAssertNil(countryItem.body)
         XCTAssert(countryItem.title == "Åland Islands")
-        if MockManager.shared.networkIsConnected {
+        if CountriesMockManager.shared.networkIsConnected {
             XCTAssertNotNil(countryItem.imageData)
         } else {
             XCTAssertNil(countryItem.imageData)

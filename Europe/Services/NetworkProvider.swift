@@ -12,7 +12,7 @@ extension URLSession: URLSessionProtocol {}
 
 class NetworkProvider {
     
-    let urlSession: URLSessionProtocol
+    private let urlSession: URLSessionProtocol
     
     init(with urlSession: URLSessionProtocol = URLSession.shared) {
         

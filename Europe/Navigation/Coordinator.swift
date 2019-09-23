@@ -36,7 +36,7 @@ extension Coordinator {
     func instantiateCountriesViewController() {
 
         let dataProvider = DataProvider()
-        let storedCountries = dataProvider.storedCountries()
+        let storedCountries = dataProvider.currentCountries()
         let countriesViewModel = CountriesViewModel(with: storedCountries)
         instantiateViewController(with: countriesViewModel)
     }

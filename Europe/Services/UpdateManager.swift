@@ -8,14 +8,15 @@
 
 import Foundation
 
-class UpdateProcessor {
+class UpdateManager {
     
-    let networkProvider: NetworkProvider
-    let dataProcessor: DataProcessor
+    private let networkProvider: NetworkProvider
+    private let dataProcessor: DataProcessor
     
-    init(with networkProvider: NetworkProvider = NetworkProvider()) {
+    init(with networkProvider: NetworkProvider = NetworkProvider(),
+         dataProcessor: DataProcessor = CoreDataProcessor()) {
         self.networkProvider = networkProvider
-        self.dataProcessor = CoreDataProcessor()
+        self.dataProcessor = dataProcessor
     }
     
     func updateCountries(completion: @escaping (Result<Bool, CountryError>) -> Void) {

@@ -13,25 +13,25 @@ typealias CountriesResult = (Result<[Country], CountryError>) -> Void
 
 class DataProvider {
     
-    let updateProcessor: UpdateProcessor
-    let storedDataProvider: StoredDataProvider
+    private let updateManager: UpdateManager
+    private let storedDataProvider: StoredDataProvider
     
-    init(updateProcessor: UpdateProcessor = UpdateProcessor(),
+    init(updateManager: UpdateManager = UpdateManager(),
          storedDataProvider: StoredDataProvider = CoreDataManager.shared) {
         
-        self.updateProcessor = updateProcessor
+        self.updateManager = updateManager
         self.storedDataProvider = storedDataProvider
     }
     
-    func storedCountries() -> [Country] {
+    func currentCountries() -> [Country] {
         
         let storedCountries = try? storedDataProvider.allCountries().get()
         return storedCountries ?? []
     }
     
-    func getCountries(completion: @escaping CountriesResult) {
+    func updatedCountries(completion: @escaping CountriesResult) {
         
-        updateProcessor.updateCountries { (countriesUpdateResult) in
+        updateManager.updateCountries { (countriesUpdateResult) in
             
             let allCountriesResult = self.storedDataProvider.allCountries()
             

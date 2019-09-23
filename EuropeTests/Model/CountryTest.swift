@@ -12,26 +12,24 @@ import CoreData
 
 class CountryTest: XCTestCase {
     
-    var countryJson: [String: Any]?
+    var country: Country!
 
     override func setUp() {
         
-        self.countryJson = MockManager.shared.mockCountryJson
+        country = CountriesMockManager.shared.mockCountry
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     }
 
     func testCountryModel() {
-                
-        let country = MockManager.shared.mockCountry
         
         XCTAssert(country.name == "Åland Islands", "\(String(describing: country.name))")
-        XCTAssert(country.capital == "Mariehamn", "\(String(describing: country.capital))")
+        XCTAssert(country.capital == "Toreja", "\(String(describing: country.capital))")
         XCTAssert(country.identifier == "ALA", "\(String(describing: country.identifier))")
         XCTAssert(country.population == 28875, "\(String(describing: country.population))")
-        if MockManager.shared.networkIsConnected {
+        if CountriesMockManager.shared.networkIsConnected {
             XCTAssertNotNil(country.flagData)
         } else {
             XCTAssertNil(country.flagData)

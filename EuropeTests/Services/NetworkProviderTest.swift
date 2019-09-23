@@ -22,12 +22,9 @@ class NetworkingTest: XCTestCase {
     
     func testNetworkError() {
         
-        let error = CountryError.networkingError
-        let mockSession = URLSessionMock(data: nil, response: nil, error: error)
-        
         let expect = expectation(description: "ErrorTest")
         
-        let networkProvider = NetworkProvider(with: mockSession)
+        let networkProvider = MockFactory.networkProviderWithError()
         
         networkProvider.getCountries { (result) in
             
@@ -46,11 +43,8 @@ class NetworkingTest: XCTestCase {
     }
     
     func testResponseError() {
-        
-        let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 400, httpVersion: nil, headerFields: nil)
-        let mockSession = URLSessionMock(data: nil, response: response, error: nil)
-        
-        let networkProvider = NetworkProvider(with: mockSession)
+
+        let networkProvider = MockFactory.networkProviderWithResponseError()
         
         let expect = expectation(description: "ErrorTest")
         
@@ -72,10 +66,7 @@ class NetworkingTest: XCTestCase {
     
     func testDataSuccess() {
         
-        let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 200, httpVersion: nil, headerFields: nil)
-        let mockSession = URLSessionMock(jsonDict: ["Mock":"Data" as AnyObject], response: response, error: nil)!
-        
-        let networkProvider = NetworkProvider(with: mockSession)
+        let networkProvider = MockFactory.networkProviderWithValidResponse()
         
         let expect = expectation(description: "ErrorTest")
         

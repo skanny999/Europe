@@ -18,9 +18,7 @@ class CountriesProcessingTest: XCTestCase {
         dataProvider = DataProvider()
     }
 
-    override func tearDown() {
-
-    }
+    override func tearDown() { }
 
     func testModelProcessor() {
         
@@ -31,9 +29,9 @@ class CountriesProcessingTest: XCTestCase {
         
         processor.processObjects(ofType: Country.self, with: data) { (result) in
             
-            let countries = try! self.dataProvider!.storedDataProvider.allCountries().get()
+            let countries = self.dataProvider!.currentCountries()
             
-            XCTAssert(countries.count == 2, "\(countries.count)")
+            XCTAssert(countries.count == 3, "\(countries.count)")
             
             XCTAssert(countries.first?.name == "Åland Islands", countries.first!.name!)
             XCTAssert(countries.first?.capital == "Toreja", countries.first!.capital!)
@@ -52,7 +50,7 @@ class CountriesProcessingTest: XCTestCase {
         
         processor.processObjects(ofType: Country.self, with: countryData) { (result) in
             
-            let countries = try! self.dataProvider!.storedDataProvider.allCountries().get()
+            let countries = self.dataProvider!.currentCountries()
             
             XCTAssert(countries.count == 1, "\(countries.count)")
             XCTAssert(countries.first?.name == "Åland Islands")

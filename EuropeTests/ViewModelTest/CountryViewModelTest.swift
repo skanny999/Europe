@@ -16,7 +16,7 @@ class CountryViewModelTest: XCTestCase {
 
     override func setUp() {
         
-        countryViewModel = CountryViewModel(with: MockManager.shared.mockCountry)        
+        countryViewModel = CountryViewModel(with: CountriesMockManager.shared.mockCountry)        
     }
 
     override func tearDown() {
@@ -40,7 +40,7 @@ class CountryViewModelTest: XCTestCase {
         let capitalIndexPath = IndexPath(row: 2, section: 0)
         XCTAssertTrue(countryViewModel?.item(at: capitalIndexPath) is DetailCellItem)
         XCTAssert(countryViewModel?.item(at: capitalIndexPath).title == "Capital")
-        XCTAssert(countryViewModel?.item(at: capitalIndexPath).body == "Mariehamn")
+        XCTAssert(countryViewModel?.item(at: capitalIndexPath).body == "Toreja")
         
         let populationIndexPath = IndexPath(row: 3, section: 0)
         XCTAssertTrue(countryViewModel?.item(at: populationIndexPath) is DetailCellItem)
@@ -50,11 +50,11 @@ class CountryViewModelTest: XCTestCase {
     
     func testFlagCellItem() {
         
-        let flagCellItem = FlagCellItem(with: MockManager.shared.mockCountry)
+        let flagCellItem = FlagCellItem(with: CountriesMockManager.shared.mockCountry)
 
         XCTAssertNil(flagCellItem.title)
         XCTAssertNil(flagCellItem.body)
-        if MockManager.shared.networkIsConnected {
+        if CountriesMockManager.shared.networkIsConnected {
             XCTAssertNotNil(flagCellItem.imageData)
         } else {
             XCTAssertNil(flagCellItem.imageData)
