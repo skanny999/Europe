@@ -10,28 +10,104 @@ import XCTest
 @testable import Europe
 
 class DataProviderTest: XCTestCase {
-    
-//    var dataProvider: DataProvider
 
     override func setUp() {
         
-
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_dataProviderWithStoredCountries() {
+        
+        let dataProvider = MockFactory.dataProviderWithStoredCountries()
+        
+        let countries = dataProvider.currentCountries()
+        XCTAssert(countries.count == 3)
     }
+    
+    func test_dataProviderWithoutStoredCountries() {
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        let dataProvider = MockFactory.dataProviderWithoutStoredCountries()
+        
+        let countries = dataProvider.currentCountries()
+        XCTAssert(countries.isEmpty)
+    }
+    
+    func test_dataProviderFailedNetworkUpdate() {
+
+        let dataProvider = MockFactory.dataProviderNetworkError()
+        
+        let exp = expectation(description: "updateFailed")
+        dataProvider.updatedCountries { (result) in
+            exp.fulfill()
+            switch result {
+            case .failure(let error):
+                if case CountryError.noCountriesError = error {
+                } else {
+                    XCTFail()
+                }
+            case .success:
+                XCTFail()
+            }
         }
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func test_dataProviderFailedParsingUpdate() {
+        
+        let dataProvider = MockFactory.dataProviderParsingkError()
+        
+        let exp = expectation(description: "updateFailed")
+        dataProvider.updatedCountries { (result) in
+            exp.fulfill()
+            switch result {
+            case .failure(let error):
+                if case CountryError.noCountriesError = error {
+                } else {
+                    print(error)
+                    XCTFail()
+                }
+            case .success:
+                XCTFail()
+            }
+        }
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func test_dataProviderUpdateErrorWithStoredCountries() {
+        
+        let dataProvider = MockFactory.dataProviderParsingErrorWithStoredCountries()
+        
+        let exp = expectation(description: "updateSuccess")
+        dataProvider.updatedCountries { (result) in
+            exp.fulfill()
+            switch result {
+            case .failure:
+                XCTFail()
+            case .success(let countries):
+                XCTAssert(countries.count == 3)
+            }
+        }
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func test_dataProviderUpdateSuccess() {
+        
+        let dataProvider = MockFactory.dataProviderUpdateSuccess()
+        
+        let exp = expectation(description: "updateSuccess")
+        dataProvider.updatedCountries { (result) in
+            exp.fulfill()
+            switch result {
+            case .failure:
+                XCTFail()
+            case .success(let countries):
+                XCTAssert(countries.count == 3)
+            }
+        }
+        wait(for: [exp], timeout: 1)
     }
 
 }

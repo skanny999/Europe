@@ -40,7 +40,6 @@ class MockStoreDataProvider: StoredDataProvider {
 }
 
 
-
 public final class URLSessionMock : URLSessionProtocol {
     
     var url: URL?

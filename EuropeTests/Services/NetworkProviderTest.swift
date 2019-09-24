@@ -66,7 +66,7 @@ class NetworkingTest: XCTestCase {
     
     func testDataSuccess() {
         
-        let networkProvider = MockFactory.networkProviderWithValidResponse()
+        let networkProvider = MockFactory.networkProviderWithData()
         
         let expect = expectation(description: "ErrorTest")
         
@@ -75,7 +75,6 @@ class NetworkingTest: XCTestCase {
             switch result {
             case .failure:
                 XCTFail()
-                
             case .success(let data):
                 XCTAssertNotNil(data)
             }

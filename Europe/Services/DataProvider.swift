@@ -37,16 +37,13 @@ class DataProvider {
             
             switch (countriesUpdateResult, allCountriesResult) {
                 
-            case (.success, .failure(let fetchError)):
-                print("couldn't fetch countries")
-                completion(.failure(fetchError))
+            case (.success, .failure):
+                completion(.failure(.noCountriesError))
                 
-            case (.failure, .failure(let fetchError)):
-                print("couldn't updated countries and there's none in memory")
-                completion(.failure(fetchError))
+            case (.failure, .failure):
+                completion(.failure(.noCountriesError))
                 
             case (.failure(let updateError), .success(let countries)):
-                print("couldn't update countries \(updateError.localizedDescription)")
                 countries.isEmpty ? completion(.failure(updateError)) : completion(.success(countries))
 
             case (.success, .success(let countries)):

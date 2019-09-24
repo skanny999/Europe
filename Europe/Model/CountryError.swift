@@ -14,7 +14,7 @@ enum CountryError: Error {
     case parsingError
     case fetchingError
     case savingError
-    case genericError
+    case noCountriesError
 }
 
 extension CountryError: LocalizedError {
@@ -30,8 +30,8 @@ extension CountryError: LocalizedError {
             return "There was a problem fetching the countries from Core Data."
         case .savingError:
             return "There was a problem saving the updated countries in Core Data."
-        case .genericError:
-            return "Something went wrong."
+        case .noCountriesError:
+            return "We couldn't update the coutries or get saved ones"
         }
     }
 }

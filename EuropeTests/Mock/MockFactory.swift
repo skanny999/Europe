@@ -11,6 +11,8 @@ import Foundation
 
 class MockFactory {
     
+    // MARK: - network
+    
     static func networkProviderWithError() -> NetworkProvider {
         
         let urlSessionWithError = URLSessionMock(data: nil, response: nil, error: CountryError.networkingError)
@@ -24,23 +26,14 @@ class MockFactory {
         return NetworkProvider(with: urlSessionResponseError)
     }
     
-    static func networkProviderWithValidResponse() -> NetworkProvider {
+    static func networkProviderWithData() -> NetworkProvider {
         
         let response = HTTPURLResponse(url: URL(string:"Mockurl")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         let urlSessionResponseValid = URLSessionMock(jsonDict: ["Mock":"Data" as AnyObject], response: response, error: nil)!
         return NetworkProvider(with: urlSessionResponseValid)
     }
     
-//    static func dataProvider(storeDataSuccess: Bool, processDataSuccess: Bool) -> DataProvider {
-//        
-//        let storedDataProvider = storeDataSuccess ? storedDataWithSuccess() : storedDataWithError()
-//        let dataProcessor = processDataSuccess ? processorWithSuccess() : processorWithError()
-//        
-//        return DataProvider(updateProcessor: dataProcessor, storedDataProvider: storedDataProvider)
-//    }
-    
-    
-    
+    // MARK: - data processor
     
     static func processorWithError() -> DataProcessor {
         
@@ -52,6 +45,8 @@ class MockFactory {
         return MockDataProcessor(with: .success(true))
     }
     
+    // MARK: - stored data
+    
     static func storedDataWithError() -> StoredDataProvider {
         
         return MockStoreDataProvider(with: .failure(.fetchingError))
@@ -61,6 +56,69 @@ class MockFactory {
         
         return MockStoreDataProvider(with: .success(CountriesMockManager.shared.mockCountries))
     }
+    
+    // MARK: - update manager
+    
+    static func updateManager(networkSuccess: Bool, dataProcessorSuccess: Bool) -> UpdateManager {
+        
+        let networkProvider = networkSuccess ? networkProviderWithData() : networkProviderWithError()
+        let dataProcessor = dataProcessorSuccess ? processorWithSuccess() : processorWithError()
+        
+        return UpdateManager(with: networkProvider, dataProcessor: dataProcessor)
+    }
+    
+    // MARK: - data provider
+    
+    static func dataProviderWithStoredCountries() -> DataProvider {
+        
+        let storedDataProvider = MockFactory.storedDataWithSuccess()
+        let updateManager = MockFactory.updateManager(networkSuccess: true, dataProcessorSuccess: true)
+        return DataProvider(updateManager: updateManager,
+                            storedDataProvider: storedDataProvider)
+    }
+    
+    static func dataProviderWithoutStoredCountries() -> DataProvider {
+        
+        let storedDataProvider = MockFactory.storedDataWithError()
+        let updateManager = MockFactory.updateManager(networkSuccess: true, dataProcessorSuccess: true)
+        return DataProvider(updateManager: updateManager,
+                            storedDataProvider: storedDataProvider)
+    }
+    
+    static func dataProviderNetworkError() -> DataProvider {
+        
+        let storedDataProvider = MockFactory.storedDataWithError()
+        let updateManager = MockFactory.updateManager(networkSuccess: false, dataProcessorSuccess: false)
+        return DataProvider(updateManager: updateManager,
+                            storedDataProvider: storedDataProvider)
+    }
+    
+    static func dataProviderParsingkError() -> DataProvider {
+        
+        let storedDataProvider = MockFactory.storedDataWithError()
+        let updateManager = MockFactory.updateManager(networkSuccess: true, dataProcessorSuccess: false)
+        return DataProvider(updateManager: updateManager,
+                            storedDataProvider: storedDataProvider)
+    }
+    
+    static func dataProviderParsingErrorWithStoredCountries() -> DataProvider {
+        
+        let storedDataProvider = MockFactory.storedDataWithSuccess()
+        let updateManager = MockFactory.updateManager(networkSuccess: true, dataProcessorSuccess: false)
+        return DataProvider(updateManager: updateManager,
+                            storedDataProvider: storedDataProvider)
+    }
+    
+    
+    
+    static func dataProviderUpdateSuccess() -> DataProvider {
+        
+        let storedDataProvider = MockFactory.storedDataWithSuccess()
+        let updateManager = MockFactory.updateManager(networkSuccess: true, dataProcessorSuccess: true)
+        return DataProvider(updateManager: updateManager,
+                            storedDataProvider: storedDataProvider)
+    }
+    
     
     
     
